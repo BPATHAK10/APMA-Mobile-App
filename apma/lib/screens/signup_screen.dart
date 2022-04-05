@@ -1,4 +1,6 @@
+import 'package:apma/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -87,7 +89,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             width: 250.0,
             child: ElevatedButton(
 
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context, CupertinoPageRoute(
+                      builder: (context) => LoginScreen()));
+                  
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
                   padding: EdgeInsets.all(0.0),
