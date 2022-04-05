@@ -1,6 +1,6 @@
+import 'package:apma/screens/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:apma/screens/home_screen.dart';
-import 'package:apma/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushReplacement(
                       context,
                       CupertinoPageRoute(
-                          builder: (context) => RegisterScreen(),
+                          builder: (context) => SignUpScreen(),
                       ),
                     );
                   },
