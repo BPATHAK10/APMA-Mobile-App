@@ -10,7 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String username = '';
+  String email = '';
   String password = '';
 
   @override
@@ -34,6 +34,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Image.asset('assets/images/logo.png')),
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(
+                15.0,
+                20.0,
+                15.0,
+                0.0,
+              ),
+              child: Text(
+                "Welcome to APMA!",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),                
+            ),
             Padding(
               padding:const EdgeInsets.fromLTRB(
                 15.0,
@@ -44,13 +59,13 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextField(
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  username = value;
+                  email = value;
                 },
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Username',
-                  hintText: 'Enter username',
+                  labelText: 'Email',
+                  hintText: 'Enter email',
                 ),
               ),
             ),
@@ -74,15 +89,15 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               height: 50,
-              width: 100,
+              width: MediaQuery. of(context). size. width-30,
               margin: const EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.blue,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextButton(
                 onPressed: () async{
-                  if (username.isEmpty || password.isEmpty) {
+                  if (email.isEmpty || password.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
@@ -105,39 +120,44 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height:20),
-            TextButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Nope',
+            Row(
+              children: [
+                SizedBox(width:20),
+                TextButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Cant use the feature right now.',
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Forgot Password',
+                    style: TextStyle(color: Colors.blue, fontSize: 18),
+                  ),
+                ),
+                SizedBox(width: MediaQuery.of(context).size.width/2-30),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => RegisterScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 18,
                     ),
                   ),
-                );
-              },
-              child: const Text(
-                'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
-              ),
-            ),
-            const SizedBox(height:30),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => RegisterScreen(),
-                  ),
-                );
-              },
-              child: const Text(
-                'New user? Create an account',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 18,
                 ),
-              ),
-            ),
+              ],
+            )
           ],
         ),
       ),
