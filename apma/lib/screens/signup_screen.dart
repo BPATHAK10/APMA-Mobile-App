@@ -11,6 +11,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 15.0),
               child: TextField(
                 onChanged: (value) {
-                  // username = value;
+                  email = value;
                 },
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -43,10 +46,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 40.0),
+              padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 30.0),
               child: TextField(
                 onChanged: (value) {
-                  // password = value;
+                  password = value;
                 },
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
