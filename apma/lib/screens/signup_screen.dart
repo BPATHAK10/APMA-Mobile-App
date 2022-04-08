@@ -102,53 +102,92 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              width: 250,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SignInButton(
-                  
-                  Buttons.GoogleDark,
-                  onPressed: () {},
-                  text: "Sign Up",
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 10.0, right: 15.0),
+                    child: const Divider(
+                      color: Colors.black,
+                      height: 50,
+                    )
+                  ),
+                ),
+    
+                const Text("OR"),
+    
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 15.0, right: 10.0),
+                    child: const Divider(
+                      color: Colors.black,
+                      height: 50,
+                    )
+                  ),
+                ),
+              ]
+            ),
+            Container(
+              height: 50,
+              width: MediaQuery. of(context). size. width-80,
+              margin: const EdgeInsets.only(top: 10),
+              child: SignInButton(
+                Buttons.GoogleDark,
+                onPressed: () {},
+                text: "Sign up with Google",
+              ),
+            ),
+            Container(
+              height: 50,
+              width: MediaQuery. of(context). size. width-80,
+              margin: const EdgeInsets.only(top: 10),
+              
+              child: SignInButton(
+                Buttons.Facebook,
+                onPressed: () {}, 
+                text: "Continue with Facebook"
+              ),
+            ),
+            Container(
+              height: 50,
+              width: MediaQuery. of(context). size. width-80,
+              margin: const EdgeInsets.only(top: 10),
+              child: SignInButton(
+                Buttons.AppleDark,
+                onPressed: () {},
+                text: "Sign up with Apple"
+              ),
+            ),
+            const SizedBox(height: 30,),
+            const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  "Already have an account?",
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                )
+            ),
+            Container(
+              height: 40,
+              width: MediaQuery. of(context). size. width-80,
+              margin: const EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () async{
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginScreen()
+                      ));
+                },
+                child: const Text(
+                  'Login',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
             ),
-            SizedBox(
-              width: 250,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SignInButton(Buttons.Facebook,
-                    onPressed: () {}, text: "Continue with Facebook"),
-              ),
-            ),
-            SizedBox(
-              width: 250,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SignInButton(Buttons.AppleDark,
-                    onPressed: () {}, text: "Sign in with Apple"),
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text("Already have an account?")),
-            SizedBox(
-              width: 250.0,
-              child: ElevatedButton(
-      
-                  onPressed: () {
-                    Navigator.pushReplacement(context, CupertinoPageRoute(
-                        builder: (context) => LoginScreen()));
-                    
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    padding: EdgeInsets.all(0.0),
-                    
-                  ),
-                  child: Text("Sign in",)),
-            )
           ],
         ),
       ),

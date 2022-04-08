@@ -12,13 +12,28 @@ class PainTrack extends StatefulWidget {
 
 class _PainTrackState extends State<PainTrack> {
   var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
+    "Aching",
+    "Burning",
+    "Crawling",
+    "Crushing",
+    "Heaviness", 
+    "Icy coldness", 
+    "Intermittent",
+    "Numbing" ,
+    "Piercing" ,
+    "Pounding", 
+    "Pressure", 
+    "Sharp", 
+    "Shooting", 
+    "Sore", 
+    "Stabbing", 
+    "Searing",
+    "Tearing", 
+    "Tenderness", 
+    "Tightness",
+    "Tingling" 
   ];
-  String dropdownvalue= 'Item 1';
+  String dropdownvalue= 'Aching';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +43,7 @@ class _PainTrackState extends State<PainTrack> {
         child: Column(
           children: [
             const SizedBox(height:30),
-            // const Text(
-            //   'Track Pain',
-            //   style: TextStyle(
-            //     fontWeight: FontWeight.w400,
-            //     fontSize: 24,
-            //   ),
-            // ),
-            // const SizedBox(height: 30,),
+            
             Container(
               child: ElevatedButton(
                 onPressed: () {
@@ -92,7 +100,7 @@ class _PainTrackState extends State<PainTrack> {
               min: 0,
             ),
             const SizedBox(height:40),
-            buttonRow(),
+            buttonRow(context),
           ],
         ),
       ),

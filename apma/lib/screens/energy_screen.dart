@@ -1,31 +1,25 @@
 import 'package:apma/widgets/appbar.dart';
 import 'package:apma/widgets/button.dart';
+import 'package:apma/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
-class PainTrack extends StatefulWidget {
-  PainTrack({Key? key}) : super(key: key);
+class EnergyTrack extends StatefulWidget {
+  EnergyTrack({Key? key}) : super(key: key);
 
   @override
-  State<PainTrack> createState() => _PainTrackState();
+  State<EnergyTrack> createState() => _EnergyTrackState();
 }
 
-class _PainTrackState extends State<PainTrack> {
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
-  String dropdownvalue= 'Item 1';
+class _EnergyTrackState extends State<EnergyTrack> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar(context,'Energy Track'),
+      appBar: showAppBar(context,'Energy'),
+      drawer: showDrawer(context),
       body: Container(
         child: Column(
           children: [
-            const Text('Track Energy Levels'),
             const SizedBox(height: 20,),
             ElevatedButton(
               onPressed: () {
@@ -49,7 +43,7 @@ class _PainTrackState extends State<PainTrack> {
               min: 0,
             ),
             const SizedBox(height:40),
-            buttonRow(),
+            buttonRow(context),
           ],
         ),
       ),

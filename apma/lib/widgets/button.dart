@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buttonRow(){
+Widget buttonRow(BuildContext context){
   return Container(
     padding: const EdgeInsets.all(32.0),
     child: Row(
@@ -8,19 +8,19 @@ Widget buttonRow(){
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget> [
         ElevatedButton(
-           style: TextButton.styleFrom(
-            primary: Colors.red,
+          style: TextButton.styleFrom(
+            backgroundColor:Colors.red ,
           ),
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
           onPressed: (){
           },
         ),
-        SizedBox(width: 200,),
+        SizedBox(width: MediaQuery.of(context).size.width/2+50),
         ElevatedButton(
            style: TextButton.styleFrom(
-            primary: Colors.green,
+            backgroundColor:Colors.green ,
           ),
-          child: Text('Done'),
+          child: const Text('Done'),
           onPressed: (){
           },
         )

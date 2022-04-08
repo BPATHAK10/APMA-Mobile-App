@@ -97,16 +97,16 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: TextButton(
                 onPressed: () async{
-                  // if (email.isEmpty || password.isEmpty) {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(
-                  //       content: Text(
-                  //         'Please fill out all fields',
-                  //       ),
-                  //     ),
-                  //   );
-                  //   return;
-                  // }
+                  if (email.isEmpty || password.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Please fill out all fields',
+                        ),
+                      ),
+                    );
+                    return;
+                  }
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

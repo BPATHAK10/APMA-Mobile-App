@@ -8,7 +8,7 @@ PreferredSizeWidget showAppBar(BuildContext context,String title){
         Text(
           title,
         ),
-        SizedBox(width: MediaQuery.of(context).size.width-50,),
+        SizedBox(width: MediaQuery.of(context).size.width-200,),
         Image.asset(
           'assets/images/logo.png',
           fit: BoxFit.contain,

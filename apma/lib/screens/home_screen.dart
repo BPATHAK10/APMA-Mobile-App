@@ -39,23 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisCount: 2,
         mainAxisSpacing: 15,
         crossAxisSpacing: 15,
-        // ignore: prefer_const_literals_to_create_immutables
         children: <Widget>[
-          const MyTile(
-            title: "Pain",
-          ),
-          const MyTile(
-            title: "Energy Level",
-          ),
-          const MyTile(
-            title: "Exercise",
-          ),
-          const MyTile(
-            title: "Sleep",
-          ),
-          const MyTile(title: "Work"),
-          const MyTile(title: "Toolkit"),
-          
+          MyTile(title: "Pain",),
+          MyTile(title: "Energy Level",),
+          MyTile(title: "Exercise",),
+          MyTile(title: "Sleep",),
+          MyTile(title: "Work"),
+          MyTile(title: "Toolkit"),
         ],
       )
     );

@@ -1,4 +1,5 @@
 import 'package:apma/screens/home_screen.dart';
+import 'package:apma/screens/login_screen.dart';
 import 'package:apma/screens/pain_track_screen.dart';
 import 'package:apma/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,10 @@ Widget showDrawer(BuildContext context){
         ),
         ElevatedButton(
           onPressed:(){
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context)=> LoginScreen())
+            );
           }, 
           child: const Text('Logout')
         ),
