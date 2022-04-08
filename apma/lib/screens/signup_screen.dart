@@ -33,29 +33,73 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 15.0),
+              padding:const EdgeInsets.fromLTRB(
+                15.0,
+                20.0,
+                15.0,
+                0.0,
+              ),
               child: TextField(
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
                 },
                 textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter your email address',
-                    hintText: 'Enter email'),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                  hintText: 'Enter email',
+                ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 30.0),
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 onChanged: (value) {
                   password = value;
                 },
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter your password',
-                    hintText: 'Enter password'),
+                obscureText: true,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                  hintText: 'Enter password',
+                ),
+                cursorColor: Colors.red,
+                cursorRadius: const Radius.circular(8.0),
+                cursorWidth: 8.0,
+              ),
+            ),
+            Container(
+              height: 50,
+              width: MediaQuery. of(context). size. width-30,
+              margin: const EdgeInsets.only(top: 20),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () async{
+                  if (email.isEmpty || password.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Please fill out all fields',
+                        ),
+                      ),
+                    );
+                    return;
+                  }
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginScreen()
+                      ));
+                },
+                child: const Text(
+                  'Sign Up',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
             ),
             SizedBox(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:apma/widgets/appbar.dart';
+import 'package:apma/widgets/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -11,35 +13,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
+      appBar: showAppBar('Home'),
+      drawer: showDrawer(context),
+      body:Container(
+        child: Column(
+          children: [
+            const SizedBox(height:100),
+            const Text('HomeScreen'),
           ],
-        ),
-      ),
-      body: Center(
-        child: Text('Homescreen'),
+        )
       ),
     );
   }
