@@ -22,7 +22,7 @@ class _PainTrackState extends State<PainTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar('Pain'),
+      appBar: showAppBar(context,'Pain'),
       drawer: showDrawer(context),
       body: Container(
         child: Column(

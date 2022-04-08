@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-PreferredSizeWidget showAppBar(String title){
+PreferredSizeWidget showAppBar(BuildContext context,String title){
   return AppBar(
     centerTitle: false,
     title: Row(
@@ -8,7 +8,7 @@ PreferredSizeWidget showAppBar(String title){
         Text(
           title,
         ),
-        const SizedBox(width: 300,),
+        SizedBox(width: MediaQuery.of(context).size.width-50,),
         Image.asset(
           'assets/images/logo.png',
           fit: BoxFit.contain,

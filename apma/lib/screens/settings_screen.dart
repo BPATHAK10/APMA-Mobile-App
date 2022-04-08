@@ -22,7 +22,7 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar('Settings'),
+      appBar: showAppBar(context,'Settings'),
       drawer: showDrawer(context),
       body:SettingsList(
         sections: [

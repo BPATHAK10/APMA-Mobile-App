@@ -21,7 +21,7 @@ class _PainTrackState extends State<PainTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar('Energy Track'),
+      appBar: showAppBar(context,'Energy Track'),
       body: Container(
         child: Column(
           children: [
