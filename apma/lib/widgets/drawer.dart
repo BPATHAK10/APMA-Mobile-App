@@ -1,6 +1,5 @@
 import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/login_screen.dart';
-import 'package:apma/screens/pain_track_screen.dart';
 import 'package:apma/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,15 +26,6 @@ Widget showDrawer(BuildContext context){
           } 
         ),
         ListTile(
-          title: Text('Pain'),
-          onTap: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context)=> PainTrack())
-            );
-          },
-        ),
-        ListTile(
           title: Text('Your Stories'),
           onTap: () {
           },
@@ -45,14 +35,28 @@ Widget showDrawer(BuildContext context){
           onTap: () {
           },
         ),
-        ElevatedButton(
-          onPressed:(){
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context)=> LoginScreen())
-            );
-          }, 
-          child: const Text('Logout')
+        const SizedBox(height:30),
+        Row(
+          children: [
+            const SizedBox(width:10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+                onPrimary: Colors.white,
+                shadowColor: Colors.red,
+                elevation: 3,
+                minimumSize: const Size(80, 40)
+              ),
+              onPressed:(){
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context)=> LoginScreen())
+                );
+              }, 
+              child: const Text('Logout')
+            ),
+            const SizedBox(width:10),
+          ],
         ),
       ],
     ),

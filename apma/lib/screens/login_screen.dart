@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: TextButton(
+              child: ElevatedButton(
                 onPressed: () async{
                   if (email.isEmpty || password.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(

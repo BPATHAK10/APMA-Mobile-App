@@ -1,3 +1,5 @@
+import 'package:apma/screens/exercise_screen.dart';
+import 'package:apma/screens/sleep_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/screens/pain_track_screen.dart';
 import 'package:apma/screens/energy_screen.dart';
@@ -9,6 +11,8 @@ class MyTile extends StatelessWidget {
   Map<String, dynamic> maptonavigation = {
     'Pain': PainTrack(),
     'Energy Level': EnergyTrack(),
+    'Exercise': ExerciseScreen(),
+    'Sleep':SleepScreen(),
   };
 
   @override
