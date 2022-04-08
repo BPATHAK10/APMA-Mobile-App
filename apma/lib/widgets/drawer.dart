@@ -1,3 +1,4 @@
+import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/pain_track_screen.dart';
 import 'package:apma/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ Widget showDrawer(BuildContext context){
           onTap: (){
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context)=> SettingScreen())
+              MaterialPageRoute(builder: (context)=> HomeScreen())
             );
           }  
         ),
