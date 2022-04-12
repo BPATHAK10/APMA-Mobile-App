@@ -1,25 +1,29 @@
 import 'package:apma/screens/exercise_screen.dart';
+import 'package:apma/screens/food_track.dart';
+import 'package:apma/screens/medication.dart';
 import 'package:apma/screens/sleep_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/screens/pain_track_screen.dart';
 import 'package:apma/screens/energy_screen.dart';
 
-class MyTile extends StatelessWidget {
-  MyTile({Key? key, required this.title}) : super(key: key);
+class CustomTile extends StatelessWidget {
+ CustomTile({Key? key, required this.title}) : super(key: key);
 
   final String title;
   Map<String, dynamic> maptonavigation = {
     'Pain': PainTrack(),
-    'Energy Level': EnergyTrack(),
+    'Energy': EnergyTrack(),
     'Exercise': ExerciseScreen(),
     'Sleep':SleepScreen(),
+    'Medications':MedicTrack(),
+    'Food': FoodTrack(),
   };
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context)=> maptonavigation[title])
         );

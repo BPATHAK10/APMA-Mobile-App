@@ -1,6 +1,5 @@
 import 'package:apma/widgets/appbar.dart';
 import 'package:apma/widgets/button.dart';
-import 'package:apma/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class PainTrack extends StatefulWidget {
@@ -38,7 +37,6 @@ class _PainTrackState extends State<PainTrack> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: showAppBar(context,'Pain'),
-      drawer: showDrawer(context),
       body: Container(
         child: Column(
           children: [

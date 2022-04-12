@@ -7,6 +7,9 @@ Widget showDrawer(BuildContext context){
   return  Drawer(
     child: ListView(
       children: <Widget>[
+        const DrawerHeader(
+          child: Text('APMA'),
+        ),
         ListTile(
           title: const Text('Home'),
           onTap: (){
@@ -15,6 +18,11 @@ Widget showDrawer(BuildContext context){
               MaterialPageRoute(builder: (context)=> HomeScreen())
             );
           }  
+        ),
+        ListTile(
+          title: const Text('History'),
+          onTap: () {
+          },
         ),
         ListTile(
           title: const Text('Settings'),
@@ -26,37 +34,13 @@ Widget showDrawer(BuildContext context){
           } 
         ),
         ListTile(
-          title: Text('Your Stories'),
+          title: const Text('Logout'),
           onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context)=> LoginScreen())
+            ); 
           },
-        ),
-        ListTile(
-          title: const Text('Membership'),
-          onTap: () {
-          },
-        ),
-        const SizedBox(height:30),
-        Row(
-          children: [
-            const SizedBox(width:10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-                onPrimary: Colors.white,
-                shadowColor: Colors.red,
-                elevation: 3,
-                minimumSize: const Size(80, 40)
-              ),
-              onPressed:(){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context)=> LoginScreen())
-                );
-              }, 
-              child: const Text('Logout')
-            ),
-            const SizedBox(width:10),
-          ],
         ),
       ],
     ),

@@ -2,19 +2,19 @@ import 'package:apma/widgets/appbar.dart';
 import 'package:apma/widgets/button.dart';
 import 'package:flutter/material.dart';
 
-class EnergyTrack extends StatefulWidget {
-  EnergyTrack({Key? key}) : super(key: key);
+class MedicTrack extends StatefulWidget {
+  MedicTrack({Key? key}) : super(key: key);
 
   @override
-  State<EnergyTrack> createState() => _EnergyTrackState();
+  State<MedicTrack> createState() => _MedicTrackState();
 }
 
-class _EnergyTrackState extends State<EnergyTrack> {
+class _MedicTrackState extends State<MedicTrack> {
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar(context,'Energy'),
+      appBar: showAppBar(context,'Medications'),
       body: Container(
         child: Column(
           children: [

@@ -1,8 +1,6 @@
-import 'package:apma/screens/login_screen.dart';
 import 'package:apma/widgets/appbar.dart';
 import 'package:apma/widgets/drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
 
 class SettingScreen extends StatefulWidget {
   
@@ -24,31 +22,46 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       appBar: showAppBar(context,'Settings'),
       drawer: showDrawer(context),
-      body:SettingsList(
-        sections: [
-          CustomSettingsSection(
-            child: Column(
+      body:
+        ListView(
+          children: const [
+            ExpansionTile(
+              title: Text('Account Information'),
               children: [
-                const SizedBox(height: 20,),
-                ListTile(title: Text('My Profile'),),
-                const SizedBox(height: 15,),
-                ListTile(title: Text('My Profile'),),
+
               ],
-            )
-          ),
-          SettingsSection(
-            title: const Text('Common'),
-            tiles: <SettingsTile>[
-              SettingsTile.switchTile(
-                onToggle: (value) {},
-                initialValue: true,
-                leading: const Icon(Icons.format_paint),
-                title:const Text('Enable Dark Theme'),
-              ),
-            ],
-          ),
-        ],
-      ),
+            ),
+            ExpansionTile(
+              title: Text('Security'),
+              children: [
+                
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Feedback'),
+              children: [
+                
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Report'),
+              children: [
+                
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Terms of Use'),
+              children: [
+                
+              ],
+            ),ExpansionTile(
+              title: Text('About Us'),
+              children: [
+                
+              ],
+            ),
+          ],
+        )
     );
   }
 }

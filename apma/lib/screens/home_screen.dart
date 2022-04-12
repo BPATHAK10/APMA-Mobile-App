@@ -11,43 +11,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final screens = [
+    'Home',
+    'Notifications',
+    'Profile'
+  ];
+  final List<Widget> screenPages = [
+    GridView.count(
+      padding: const EdgeInsets.all(25),
+      crossAxisCount: 2,
+      mainAxisSpacing: 15,
+      crossAxisSpacing: 15,
+      children: <Widget>[
+        CustomTile(title: "Pain",),
+        CustomTile(title: "Energy",),
+        CustomTile(title: "Exercise",),
+        CustomTile(title: "Sleep",),
+        CustomTile(title: "Medications"),
+        CustomTile(title: "Food"),
+      ],
+    ),
+    const Center(
+      child: Icon(
+        Icons.call,
+        size: 150,
+      ),
+    ),
+    const Center(
+      child: Icon(
+        Icons.camera,
+        size: 150,
+      ),
+    ),
+  ];
+  int selectedState = 0;
+
+  void changeTab(int index) {
+    setState(() => selectedState = index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar(context,'Home'),
+      appBar: showAppBar(context,screens[selectedState]),
       drawer: showDrawer(context),
       bottomNavigationBar:
           BottomNavigationBar(
+            currentIndex: selectedState,
+            onTap: (index) => changeTab(index),
+            type: BottomNavigationBarType.fixed,
+            unselectedItemColor: Colors.grey,
+            selectedItemColor: Colors.red,
+            showUnselectedLabels: false,
+            showSelectedLabels: false,
+            iconSize: 20,
             items:  <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/reports.png', width: 30, height: 30),
-                label: "Reports",
+                icon: const Icon(Icons.home),
+                label: screens[0],
               ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/resources.png', width: 30, height: 30,),
-                label: "Resources"
+                icon: const Icon(Icons.notifications),
+                label: screens[1]
               ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/journal.png', width: 30, height: 30),
-                label: "Journal"
+                icon: const Icon(Icons.person),
+                label: screens[2]
               ),
             ],
       ),
-      
-      body: GridView.count(
-        padding: const EdgeInsets.all(25),
-        crossAxisCount: 2,
-        mainAxisSpacing: 15,
-        crossAxisSpacing: 15,
-        children: <Widget>[
-          MyTile(title: "Pain",),
-          MyTile(title: "Energy Level",),
-          MyTile(title: "Exercise",),
-          MyTile(title: "Sleep",),
-          MyTile(title: "Work"),
-          MyTile(title: "Toolkit"),
-        ],
-      )
+      body: IndexedStack(
+        index: selectedState,
+        children: screenPages,
+      ),
     );
   }
 }

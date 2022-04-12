@@ -1,6 +1,5 @@
 import 'package:apma/widgets/appbar.dart';
 import 'package:apma/widgets/button.dart';
-import 'package:apma/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseScreen extends StatefulWidget {
@@ -16,7 +15,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: showAppBar(context,'Exercise'),
-      drawer: showDrawer(context),
       body: Container(
         child: Column(
           children: [
