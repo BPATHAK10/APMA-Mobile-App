@@ -10,6 +10,7 @@ class CustomTile extends StatelessWidget {
  CustomTile({Key? key, required this.title}) : super(key: key);
 
   final String title;
+  
   Map<String, dynamic> maptonavigation = {
     'Pain': PainTrack(),
     'Medications':MedicTrack(),
@@ -26,7 +27,7 @@ class CustomTile extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+          padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 15),
           child: InkWell(
             onTap: () async {
               await Navigator.push(
@@ -36,16 +37,21 @@ class CustomTile extends StatelessWidget {
                 ),
               );
             },
-            child: Container(
-              width: 100,
-              height: 100,
-              decoration: const BoxDecoration(
-                color: Color(0xFFEEEEEE),
-                shape: BoxShape.circle,
+            child: Center(
+              child: Container(
+                child: Image.asset("assets/icons/$title.png", scale: 0.75,),
+                width: 100,
+                height: 80,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFEEEEEE),
+                  backgroundBlendMode: BlendMode.lighten,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),
         ),
+        
         Text(
           title,
         ),

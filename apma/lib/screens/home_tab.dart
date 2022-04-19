@@ -16,7 +16,7 @@ class _HomeTabState extends State<HomeTab> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+        padding: const EdgeInsetsDirectional.fromSTEB(10, 20, 10, 10),
         child: GridView(
           padding: EdgeInsets.zero,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -27,7 +27,7 @@ class _HomeTabState extends State<HomeTab> {
           ),
           // scrollDirection: Axis.vertical,
           children: [
-            CustomTile(title: "Pain",),
+            CustomTile(title: "Pain"),
             CustomTile(title: "Medications"),
             CustomTile(title: "Energy",),
             CustomTile(title: "Exercise",),
