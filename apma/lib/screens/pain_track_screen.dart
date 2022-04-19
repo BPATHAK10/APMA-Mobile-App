@@ -75,6 +75,7 @@ class _PainTrackState extends State<PainTrack> {
                   }
                 },
               ),
+              const SizedBox(height: 30,),
               const Text("Select Pain Type"),      
               Padding(
                 padding: const EdgeInsets.all(15.0),
