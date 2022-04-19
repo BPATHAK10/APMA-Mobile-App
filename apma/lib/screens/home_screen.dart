@@ -1,7 +1,9 @@
+import 'package:apma/screens/home_tab.dart';
+import 'package:apma/screens/notification_tab.dart';
+import 'package:apma/screens/profile_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/widgets/appbar.dart';
 import 'package:apma/widgets/drawer.dart';
-import 'package:apma/widgets/custom_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -11,38 +13,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final screens = [
+  final tabs = [
     'Home',
     'Notifications',
     'Profile'
   ];
-  final List<Widget> screenPages = [
-    GridView.count(
-      padding: const EdgeInsets.all(25),
-      crossAxisCount: 2,
-      mainAxisSpacing: 15,
-      crossAxisSpacing: 15,
-      children: <Widget>[
-        CustomTile(title: "Pain",),
-        CustomTile(title: "Energy",),
-        CustomTile(title: "Exercise",),
-        CustomTile(title: "Sleep",),
-        CustomTile(title: "Medications"),
-        CustomTile(title: "Food"),
-      ],
-    ),
-    const Center(
-      child: Icon(
-        Icons.call,
-        size: 150,
-      ),
-    ),
-    const Center(
-      child: Icon(
-        Icons.camera,
-        size: 150,
-      ),
-    ),
+  final List<Widget> tabPages = [
+    HomeTab(),
+    NotificationTab(),
+    ProfileTab(),
   ];
   int selectedState = 0;
 
@@ -53,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar(context,screens[selectedState]),
+      appBar: showAppBar(context,tabs[selectedState]),
       drawer: showDrawer(context),
       bottomNavigationBar:
           BottomNavigationBar(
@@ -68,21 +47,21 @@ class _HomeScreenState extends State<HomeScreen> {
             items:  <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: const Icon(Icons.home),
-                label: screens[0],
+                label: tabs[0],
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.notifications),
-                label: screens[1]
+                label: tabs[1]
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.person),
-                label: screens[2]
+                label: tabs[2]
               ),
             ],
       ),
       body: IndexedStack(
         index: selectedState,
-        children: screenPages,
+        children: tabPages,
       ),
     );
   }
