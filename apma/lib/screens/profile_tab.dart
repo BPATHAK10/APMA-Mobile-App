@@ -60,7 +60,7 @@ class _ProfileTabState extends State<ProfileTab> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(15.0),
               child: Row(
                 children: <Widget>[
                   Expanded(child: Text(
@@ -78,7 +78,7 @@ class _ProfileTabState extends State<ProfileTab> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(15.0),
               child: Row(
                 children: <Widget>[
                   Expanded(child: Text("Contact Number",style: myTextStyle,)),
@@ -93,7 +93,7 @@ class _ProfileTabState extends State<ProfileTab> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(15.0),
               child: Row(
                 children: <Widget>[
                   Expanded(child: Text("Age",style: myTextStyle,)),
@@ -107,7 +107,7 @@ class _ProfileTabState extends State<ProfileTab> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: <Widget>[
                     Expanded(child: Text("Gender",style: myTextStyle,)),
@@ -122,7 +122,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   ],
                 )),
             Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: <Widget>[
                     Expanded(child: Text("Postal Code",style: myTextStyle,)),
