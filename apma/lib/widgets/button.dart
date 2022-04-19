@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 Widget buttonRow(BuildContext context){
   return Container(
-    padding: const EdgeInsets.all(32.0),
+    padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
     child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget> [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.red,
+            primary: const Color(0xFF671616),
             onPrimary: Colors.white,
             shadowColor: Colors.redAccent,
             elevation: 3,
@@ -22,7 +22,7 @@ Widget buttonRow(BuildContext context){
         SizedBox(width: MediaQuery.of(context).size.width/2),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.green,
+            primary: const Color(0xFF197B0C),
             onPrimary: Colors.white,
             shadowColor: Colors.greenAccent,
             elevation: 3,

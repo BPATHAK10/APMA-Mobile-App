@@ -12,42 +12,44 @@ class CustomTile extends StatelessWidget {
   final String title;
   Map<String, dynamic> maptonavigation = {
     'Pain': PainTrack(),
+    'Medications':MedicTrack(),
     'Energy': EnergyTrack(),
     'Exercise': ExerciseScreen(),
     'Sleep':SleepScreen(),
-    'Medications':MedicTrack(),
     'Food': FoodTrack(),
   };
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context)=> maptonavigation[title])
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(boxShadow: [
-           BoxShadow(
-            color: Colors.grey.shade600,
-            blurRadius: 10.0,
-          ),
-        ]),
-        child: Card(
-          shadowColor: Colors.black,
-          color: Colors.blueAccent,
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            child: Center(
-                child: Text(
-              title,
-              style: TextStyle(fontSize: 25),
-            )),
+    return 
+    Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+          child: InkWell(
+            onTap: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => maptonavigation[title],
+                ),
+              );
+            },
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: const BoxDecoration(
+                color: Color(0xFFEEEEEE),
+                shape: BoxShape.circle,
+              ),
+            ),
           ),
         ),
-      ),
+        Text(
+          title,
+        ),
+      ],
     );
   }
 }

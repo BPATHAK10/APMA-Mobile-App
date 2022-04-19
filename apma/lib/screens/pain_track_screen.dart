@@ -10,6 +10,9 @@ class PainTrack extends StatefulWidget {
 }
 
 class _PainTrackState extends State<PainTrack> {
+  late String dropDownValue = "Aching";
+  late double sliderValue = 0;
+  late bool checkboxListTileValue = false;
   var items = [
     "Aching",
     "Burning",
@@ -32,72 +35,74 @@ class _PainTrackState extends State<PainTrack> {
     "Tightness",
     "Tingling" 
   ];
-  String dropdownvalue= 'Aching';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: showAppBar(context,'Pain'),
-      body: Container(
+      body: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(5, 10, 5, 0),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height:30),
-            
-            Container(
-              child: ElevatedButton(
-                onPressed: () {
-                  showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2010),
-                    lastDate: DateTime(2030),
-                  );
-                },
-                child: const Text(
-                  'Select Date',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+            ElevatedButton(
+              onPressed: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2010),
+                  lastDate: DateTime(2030),
+                );
+              },
+              child: const Text(
+                'Select Date',
+                style: TextStyle(
+                  fontSize: 16,
                 ),
               ),
-            ),
-            const SizedBox(height:40),
-            Container(
-              child: Column(
-                children: [
-                  const Text(
-                    'Select Pain Type',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  DropdownButton(
-                    iconSize: 24,
-                    value: dropdownvalue,
-                    icon: const Icon(Icons.keyboard_arrow_down), 
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(), 
-                    onChanged: (String? newValue){
-                      setState(() {
-                        dropdownvalue = newValue!;
-                      });
-                    }
-                  ),
-                ],
+            ),            
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton(
+                isExpanded: true,
+                iconSize: 24,
+                hint: const Text("Select Pain Type"),
+                value: dropDownValue,
+                icon: const Icon(Icons.keyboard_arrow_down), 
+                items: items.map((String items) {
+                  return DropdownMenuItem(
+                    value: items,
+                    child: Text(items),
+                  );
+                }).toList(), 
+                onChanged: (String? newValue){
+                  setState(() {
+                    dropDownValue = newValue!;
+                  });
+                }
               ),
             ),
-            const SizedBox(height:40),
             Slider(
-              onChanged: (double val){
-              },
-              value: 30,
-              max: 100,
               min: 0,
+              max: 10,
+              value: sliderValue ??= 0,
+              onChanged: (newValue) {
+                setState(() => sliderValue = newValue);
+              },
             ),
             const SizedBox(height:40),
+            CheckboxListTile(
+              value: checkboxListTileValue ??= true,
+              onChanged: (newValue) => setState(() => checkboxListTileValue = newValue!),
+              title:const  Text(
+                'Does the pain improve after Medication?',
+              ),
+              tileColor: const Color(0xFFF5F5F5),
+              dense: false,
+              controlAffinity: ListTileControlAffinity.trailing,
+            ),
             buttonRow(context),
           ],
         ),
