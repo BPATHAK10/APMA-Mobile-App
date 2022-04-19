@@ -19,7 +19,6 @@ Widget buttonRow(BuildContext context){
           onPressed: (){
           },
         ),
-        SizedBox(width: MediaQuery.of(context).size.width/2),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: const Color(0xFF197B0C),
