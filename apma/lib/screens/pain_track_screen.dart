@@ -10,11 +10,9 @@ class PainTrack extends StatefulWidget {
 }
 
 class _PainTrackState extends State<PainTrack> {
-  late DateTimeRange calendarSelectedDay;
-  late String radioButtonValue;
   late String dropDownValue = "Aching";
-  late double sliderValue;
-  late bool checkboxListTileValue;
+  late double sliderValue = 0;
+  late bool checkboxListTileValue = false;
   var items = [
     "Aching",
     "Burning",
@@ -65,23 +63,26 @@ class _PainTrackState extends State<PainTrack> {
                 ),
               ),
             ),            
-            DropdownButton(
-              isExpanded: true,
-              iconSize: 24,
-              hint: const Text("Select Pain Type"),
-              value: dropDownValue,
-              icon: const Icon(Icons.keyboard_arrow_down), 
-              items: items.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(), 
-              onChanged: (String? newValue){
-                setState(() {
-                  dropDownValue = newValue!;
-                });
-              }
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton(
+                isExpanded: true,
+                iconSize: 24,
+                hint: const Text("Select Pain Type"),
+                value: dropDownValue,
+                icon: const Icon(Icons.keyboard_arrow_down), 
+                items: items.map((String items) {
+                  return DropdownMenuItem(
+                    value: items,
+                    child: Text(items),
+                  );
+                }).toList(), 
+                onChanged: (String? newValue){
+                  setState(() {
+                    dropDownValue = newValue!;
+                  });
+                }
+              ),
             ),
             Slider(
               min: 0,
