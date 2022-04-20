@@ -1,7 +1,10 @@
+import 'package:apma/models/user_model.dart';
 import 'package:apma/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:apma/Boxes/boxes.dart';
+import 'package:hive/hive.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -90,6 +93,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     );
                     return;
                   }
+                  createUser(email, password);
+
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -192,5 +197,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  void createUser(String email, String password) {
+    final user = User()
+      ..email = email
+      ..password = password
+      ..name = ""
+      ..contactNumber = ""
+      ..age = ""
+      ..gender = ""
+      ..postCode = "";
+      
+
+    try{
+    final userBox = Boxes.getUsers();
+    userBox.put(user.email, user);
+    }
+    catch{
+      print("sign up failed");
+    }
+    // print("user created");
+    // final users = userBox.values.toList().cast<User>();
+    
+    // for (var user in users) {
+    //   print(user.email);
+    //   print(user.password);
+    //   print(user.age);
+    //   print(user.contactNumber);
+    //   print(user.gender);
+    //   print(user.pains);
+    //   print(user.medicines); 
+    // }
+
   }
 }

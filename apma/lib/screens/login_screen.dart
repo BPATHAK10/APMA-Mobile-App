@@ -1,10 +1,14 @@
+import 'package:apma/models/user_model.dart';
 import 'package:apma/screens/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:apma/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:apma/Boxes/boxes.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key,}): super(key:key);
+  const LoginScreen({
+    Key? key,
+  }) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -47,10 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                 ),
-              ),                
+              ),
             ),
             Padding(
-              padding:const EdgeInsets.fromLTRB(
+              padding: const EdgeInsets.fromLTRB(
                 15.0,
                 20.0,
                 15.0,
@@ -89,29 +93,37 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Container(
               height: 50,
-              width: MediaQuery. of(context). size. width-30,
+              width: MediaQuery.of(context).size.width - 30,
               margin: const EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ElevatedButton(
-                onPressed: () async{
-                  // if (email.isEmpty || password.isEmpty) {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(
-                  //       content: Text(
-                  //         'Please fill out all fields',
-                  //       ),
-                  //     ),
-                  //   );
-                  //   return;
-                  // }
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomeScreen()
-                      ));
+                onPressed: () async {
+                  if (email.isEmpty || password.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Please fill out all fields',
+                        ),
+                      ),
+                    );
+                    return;
+                  }
+                  final user = checkUser(email, password);
+                  if (user != null) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Wrong email or password',
+                        ),
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
                   'Login',
@@ -119,10 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            const SizedBox(height:20),
+            const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(width:20),
+                SizedBox(width: 20),
                 TextButton(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -138,13 +150,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(color: Colors.blue, fontSize: 18),
                   ),
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width/2-50),
+                SizedBox(width: MediaQuery.of(context).size.width / 2 - 50),
                 TextButton(
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
                       CupertinoPageRoute(
-                          builder: (context) => SignUpScreen(),
+                        builder: (context) => SignUpScreen(),
                       ),
                     );
                   },
@@ -162,5 +174,19 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  User? checkUser(String email, String password) {
+    final userBox = Boxes.getUsers();
+
+    if (userBox.containsKey(email)) {
+      final user = userBox.get(email);
+      if (user?.password == password) {
+        return user;
+      }
+    } else {
+      return null;
+    }
+    return null;
   }
 }
