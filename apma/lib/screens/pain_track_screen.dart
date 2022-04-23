@@ -1,5 +1,7 @@
+import 'package:apma/Boxes/boxes.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class PainTrack extends StatefulWidget {
@@ -49,8 +51,12 @@ class _PainTrackState extends State<PainTrack> {
     "Tightness",
     "Tingling" 
   ];
+
   @override
   Widget build(BuildContext context) {
+    final userEmail = Provider.of<String>(context,listen:false);
+    final user = Boxes.getUsers().get(userEmail);
+
     return Scaffold(
       appBar: showAppBar(context,'Pain'),
       body: SingleChildScrollView(

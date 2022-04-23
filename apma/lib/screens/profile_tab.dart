@@ -1,4 +1,5 @@
-import 'package:apma/Provider%20Models/userProviderObject.dart';
+import 'package:apma/Boxes/boxes.dart';
+import 'package:apma/models/pain_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,9 +39,13 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   Widget build(BuildContext context) {
-    final _userEmail = Provider.of<UserModel>(context, listen: false).getEmail;
-    print("this is emaillllll:::");
-    print(_userEmail);
+    final _userEmail = Provider.of<String>(context, listen: false);
+
+    final user = Boxes.getUsers().get(_userEmail);
+
+    print(user?.age);
+    print(user?.name);
+    print(user?.gender);
 
     return SingleChildScrollView(
       child: Center(

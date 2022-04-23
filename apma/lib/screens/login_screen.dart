@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:apma/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/Boxes/boxes.dart';
-import 'package:apma/Provider Models/userProviderObject.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -113,12 +113,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     return;
                   }
                   final user = checkUser(email, password);
+            
                   if (user != null) {
-                    print(user.email);
-                    final currentUser = UserModel();
-                    currentUser.updateUser(email);
+                    print("inside user with email:: "+user.email);
+                    // final currentUser = UserModel();
+                    // currentUser.updateUser(email);
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                        MaterialPageRoute(builder: (context) => Provider<String>(
+                          create: (context) => user.email,
+                          child: HomeScreen())));
                   }else{
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -128,7 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     );
                   }
-                },
+                  }
+                ,
                 child: const Text(
                   'Login',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -180,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  User? checkUser(String email, String password) {
+  User? checkUser(String email, String password){
     final userBox = Boxes.getUsers();
 
     if (userBox.containsKey(email)) {
