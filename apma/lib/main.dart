@@ -1,3 +1,4 @@
+import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen()    
+      home: HomeScreen()    
     );
   }
 }

@@ -10,7 +10,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   final TextEditingController _controller = TextEditingController();
 
-  final genderOptions = ["Male", "Female"];
+  final genderOptions = ["Male", "Female", "Non-binary", "Prefer not to say"];
   String? selectedGender;
 
   @override
@@ -28,9 +28,9 @@ class _ProfileTabState extends State<ProfileTab> {
         ),
       );
 
-  TextStyle myTextStyle = TextStyle(
+  TextStyle myTextStyle = const TextStyle(
       fontSize: 15,
-      fontWeight: FontWeight.bold,
+      // fontWeight: FontWeight.bold,
   );
 
   @override
@@ -77,21 +77,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(child: Text("Contact Number",style: myTextStyle,)),
-                  Expanded(
-                      child: TextFormField(
-                    // controller: _controller,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: "Enter Contact Number"),
-                  ))
-                ],
-              ),
-            ),
+            
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
@@ -102,6 +88,34 @@ class _ProfileTabState extends State<ProfileTab> {
                     // controller: _controller,
                     decoration: const InputDecoration(
                         border: UnderlineInputBorder(), labelText: "Enter Age"),
+                  ))
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(child: Text("Height",style: myTextStyle,)),
+                  Expanded(
+                      child: TextFormField(
+                    // controller: _controller,
+                    decoration: const InputDecoration(
+                        border: UnderlineInputBorder(), labelText: "Enter Height"),
+                  ))
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(child: Text("Weight",style: myTextStyle,)),
+                  Expanded(
+                      child: TextFormField(
+                    // controller: _controller,
+                    decoration: const InputDecoration(
+                        border: UnderlineInputBorder(), labelText: "Enter Weight"),
                   ))
                 ],
               ),
@@ -134,7 +148,42 @@ class _ProfileTabState extends State<ProfileTab> {
                           labelText: "Enter Postal code"),
                     ))
                   ],
-                )),
+                )
+              ),
+              const SizedBox(height: 20,),
+              Container(
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget> [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFF671616),
+                        onPrimary: Colors.white,
+                        shadowColor: Colors.redAccent,
+                        elevation: 3,
+                        minimumSize: const Size(100, 50),
+                      ),
+                      child: const Text('Cancel'),
+                      onPressed: (){
+                      },
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color(0xFF197B0C),
+                        onPrimary: Colors.white,
+                        shadowColor: Colors.greenAccent,
+                        elevation: 3,
+                        minimumSize: const Size(100, 50),
+                      ),
+                      child: const Text('Done'),
+                      onPressed: (){
+                      },
+                    )
+                  ]
+                ),  
+              ),
           ],
         ),
       ),

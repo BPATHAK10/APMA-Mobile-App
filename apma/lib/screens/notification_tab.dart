@@ -11,7 +11,7 @@ class _NotificationTabState extends State<NotificationTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Icon(
         Icons.call,
         size: 150,

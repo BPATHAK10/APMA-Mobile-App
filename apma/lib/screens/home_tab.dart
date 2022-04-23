@@ -18,6 +18,7 @@ class _HomeTabState extends State<HomeTab> {
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(10, 20, 10, 10),
         child: GridView(
+          controller: ScrollController(),
           padding: EdgeInsets.zero,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -30,9 +31,9 @@ class _HomeTabState extends State<HomeTab> {
             CustomTile(title: "Pain"),
             CustomTile(title: "Medications"),
             CustomTile(title: "Energy",),
+            CustomTile(title: "Food"),
             CustomTile(title: "Exercise",),
             CustomTile(title: "Sleep",),
-            CustomTile(title: "Food"),
           ],
         )
       )

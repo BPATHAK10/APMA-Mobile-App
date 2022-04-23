@@ -20,7 +20,7 @@ Widget showDrawer(BuildContext context){
           }  
         ),
         ListTile(
-          title: const Text('History'),
+          title: const Text('My History'),
           onTap: () {
           },
         ),

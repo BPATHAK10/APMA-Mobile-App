@@ -4,13 +4,14 @@ PreferredSizeWidget showAppBar(BuildContext context,String title){
   return AppBar(
     centerTitle: false,
     title: Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
         ),
-        SizedBox(width: MediaQuery.of(context).size.width-200,),
         Image.asset(
-          'assets/images/logo.png',
+          'assets/images/logo_withbg.png',
           fit: BoxFit.contain,
           height: 32,
         ),

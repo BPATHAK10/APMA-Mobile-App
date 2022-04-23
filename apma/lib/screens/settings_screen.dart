@@ -1,5 +1,5 @@
-import 'package:apma/widgets/appbar.dart';
-import 'package:apma/widgets/drawer.dart';
+import 'package:apma/widgets/custom_appbar.dart';
+import 'package:apma/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -32,23 +32,18 @@ class _SettingScreenState extends State<SettingScreen> {
               ],
             ),
             ExpansionTile(
+              title: Text('My History'),
+              children: [
+                
+              ],
+            ),
+            ExpansionTile(
               title: Text('Security'),
               children: [
                 
               ],
             ),
-            ExpansionTile(
-              title: Text('Feedback'),
-              children: [
-                
-              ],
-            ),
-            ExpansionTile(
-              title: Text('Report'),
-              children: [
-                
-              ],
-            ),
+            
             ExpansionTile(
               title: Text('Terms of Use'),
               children: [

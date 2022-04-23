@@ -214,7 +214,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final userBox = Boxes.getUsers();
     userBox.put(user.email, user);
     }
-    catch{
+    catch(e){
       print("sign up failed");
     }
     // print("user created");

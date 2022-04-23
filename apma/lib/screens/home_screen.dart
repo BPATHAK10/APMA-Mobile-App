@@ -2,8 +2,8 @@ import 'package:apma/screens/home_tab.dart';
 import 'package:apma/screens/notification_tab.dart';
 import 'package:apma/screens/profile_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:apma/widgets/appbar.dart';
-import 'package:apma/widgets/drawer.dart';
+import 'package:apma/widgets/custom_appbar.dart';
+import 'package:apma/widgets/custom_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);

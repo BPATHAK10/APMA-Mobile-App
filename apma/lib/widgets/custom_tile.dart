@@ -15,8 +15,8 @@ class CustomTile extends StatelessWidget {
     'Pain': PainTrack(),
     'Medications':MedicTrack(),
     'Energy': EnergyTrack(),
-    'Exercise': ExerciseScreen(),
-    'Sleep':SleepScreen(),
+    'Exercise': ExerciseTrack(),
+    'Sleep':SleepTrack(),
     'Food': FoodTrack(),
   };
 
