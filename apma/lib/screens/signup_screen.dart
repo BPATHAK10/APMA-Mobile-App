@@ -1,4 +1,6 @@
+import 'package:apma/Provider%20Models/userProviderObject.dart';
 import 'package:apma/models/user_model.dart';
+import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -98,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LoginScreen()
+                          builder: (context) => HomeScreen()
                       ));
                 },
                 child: const Text(
@@ -210,14 +212,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ..postCode = "";
       
 
-    try{
     final userBox = Boxes.getUsers();
+    try{
     userBox.put(user.email, user);
     }
     catch(e){
       print("sign up failed");
     }
-    // print("user created");
+    print("user created");
+
+    final currentUser = UserModel();
+    currentUser.updateUser(email);
     // final users = userBox.values.toList().cast<User>();
     
     // for (var user in users) {

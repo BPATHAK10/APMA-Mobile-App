@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:apma/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/Boxes/boxes.dart';
+import 'package:apma/Provider Models/userProviderObject.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -113,6 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                   final user = checkUser(email, password);
                   if (user != null) {
+                    print(user.email);
+                    final currentUser = UserModel();
+                    currentUser.updateUser(email);
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
                   }else{

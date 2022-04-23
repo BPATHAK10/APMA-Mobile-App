@@ -1,4 +1,6 @@
+import 'package:apma/Provider%20Models/userProviderObject.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class _ProfileTabState extends State<ProfileTab> {
 
   final genderOptions = ["Male", "Female", "Non-binary", "Prefer not to say"];
   String? selectedGender;
+
 
   @override
   void initState() {
@@ -35,6 +38,10 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   Widget build(BuildContext context) {
+    final _userEmail = Provider.of<UserModel>(context, listen: false).getEmail;
+    print("this is emaillllll:::");
+    print(_userEmail);
+
     return SingleChildScrollView(
       child: Center(
         child: Column(
@@ -49,11 +56,11 @@ class _ProfileTabState extends State<ProfileTab> {
                   backgroundColor: Colors.white,
                   child: Image.asset('assets/images/avatar_default.png')),
                 ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.all(15.0),
               child: SizedBox(
                 // width: MediaQuery.of(context).size.width,
-                child: Text("Name",
+                child: Text(_userEmail,
                 style: TextStyle(
                   fontSize: 30
                 ),)
