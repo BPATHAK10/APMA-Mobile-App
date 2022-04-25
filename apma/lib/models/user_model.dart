@@ -12,9 +12,6 @@ class User extends HiveObject {
     @HiveField(2)
     late String name;
 
-    @HiveField(3)
-    late String contactNumber;
-
     @HiveField(4)
     late String age;
 
