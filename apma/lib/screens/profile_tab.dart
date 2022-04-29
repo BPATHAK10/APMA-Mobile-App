@@ -5,43 +5,43 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProfileData {
-  late String? name;
-  late String? age;
-  late String? gender;
-  late String? postalCode;
+  late String name;
+  late String age;
+  late String gender;
+  late String postalCode;
 
   ProfileData(this.name, this.age, this.gender, this.postalCode);
 
   void display() {
-    print(this.name);
-    print(this.age);
-    print(this.gender);
-    print(this.postalCode);
+    print(name);
+    print(age);
+    print(gender);
+    print(postalCode);
   }
 
   void updateProfileData(
-      String? name, String? age, String? gender, String? postalCode) {
+      String name, String age, String gender, String postalCode) {
     this.name = name;
     this.age = age;
     this.gender = gender;
     this.postalCode = postalCode;
   }
 
-  void updateName(String? name) {
-    this.name = name;
-  }
+  // void updateName(String? name) {
+  //   this.name = name;
+  // }
 
-  void updateAge(String? age) {
-    this.age = age;
-  }
+  // void updateAge(String? age) {
+  //   this.age = age;
+  // }
 
-  void updateGender(String? gender) {
-    this.gender = gender;
-  }
+  // void updateGender(String? gender) {
+  //   this.gender = gender;
+  // }
 
-  void updatePostalCode(String? postalCode) {
-    this.postalCode = postalCode;
-  }
+  // void updatePostalCode(String? postalCode) {
+  //   this.postalCode = postalCode;
+  // }
 }
 
 class ProfileTab extends StatefulWidget {
@@ -54,6 +54,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   // bool isEdit = false;
   late ProfileData profileData;
+  late ProfileData initialProfileData;
 
   // final TextEditingController _nameController = TextEditingController();
 
@@ -64,6 +65,7 @@ class _ProfileTabState extends State<ProfileTab> {
   void initState() {
     super.initState();
     profileData = ProfileData('', '', '', '');
+    initialProfileData = ProfileData('', '', '', '');
     // _nameController.text = "";
 
     // _controller.addListener(() {
@@ -88,14 +90,21 @@ class _ProfileTabState extends State<ProfileTab> {
     final _userEmail = Provider.of<String>(context, listen: false);
 
     final user = Boxes.getUsers().get(_userEmail);
-
-    profileData.updateProfileData(
-        user?.name, user?.age, user?.gender, user?.postCode);
+    print(user.toString());
     
-    print("inside build");
-    profileData.display();
+    profileData.updateProfileData(user!.name, user.age, user.gender,user.postCode);
+    
+    initialProfileData.updateProfileData(user!.name, user.age, user.gender,user.postCode);
+    print("initial profile data is::");
+    initialProfileData.display();
 
-    // selectedGender = user?.gender;
+    // profileData.updateProfileData(
+    //     user?.name, user?.age, user?.gender, user?.postCode);
+
+    // print("inside build");
+    // profileData.display();
+
+    // selectedGender  = initialProfileData.gender;
 
     return SingleChildScrollView(
       child: Center(
@@ -131,9 +140,9 @@ class _ProfileTabState extends State<ProfileTab> {
                   )),
                   Expanded(
                       child: TextFormField(
-                    initialValue: profileData.name,
-                    validator: (value){
-                      if(value == null){
+                    initialValue: initialProfileData.name,
+                    validator: (value) {
+                      if (value == null) {
                         return 'Please enter your name';
                       }
                       return null;
@@ -158,8 +167,10 @@ class _ProfileTabState extends State<ProfileTab> {
                   )),
                   Expanded(
                       child: TextFormField(
-                    initialValue: profileData.age,
-                    onChanged: (value) => profileData.age = value,
+                    initialValue: initialProfileData.age,
+                    onChanged: (value) {
+                      profileData.age = value;
+                    },
                     decoration: const InputDecoration(
                         border: UnderlineInputBorder(), labelText: "Enter Age"),
                   ))
@@ -181,7 +192,7 @@ class _ProfileTabState extends State<ProfileTab> {
                             hint: const Text("Select gender"),
                             value: selectedGender,
                             onChanged: (value) {
-                              profileData.gender = value;
+                              profileData.gender = value!;
                               setState(() {
                                 selectedGender = value;
                               });
@@ -200,7 +211,7 @@ class _ProfileTabState extends State<ProfileTab> {
                     )),
                     Expanded(
                         child: TextFormField(
-                      initialValue: profileData.postalCode,
+                      initialValue: initialProfileData.postalCode,
                       onChanged: (value) => profileData.postalCode = value,
                       decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
@@ -238,7 +249,29 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
                       child: const Text('Done'),
                       onPressed: () {
-                        editProfile(user, profileData);
+                        print("inside edit profile");
+                        profileData.display();
+
+                        profileData.name != initialProfileData.name ?
+                          user.name = profileData.name
+                          :
+                          user.name = initialProfileData.name;
+
+                        profileData.age != initialProfileData.age ?
+                          user.age = profileData.age
+                          :
+                          user.age = initialProfileData.age;
+                        
+                        profileData.gender != initialProfileData.gender ?
+                          user.gender = profileData.gender
+                          :
+                          user.gender = initialProfileData.gender;
+                        profileData.postalCode != initialProfileData.postalCode ?
+                          user.gender = profileData.gender
+                          :
+                          user.gender = initialProfileData.gender;
+
+                        user.save();
                       },
                     )
                   ]),
@@ -248,16 +281,4 @@ class _ProfileTabState extends State<ProfileTab> {
       ),
     );
   }
-}
-
-void editProfile(User? user, ProfileData pData) {
-  print("inside edit profile");
-  pData.display();
-
-  user?.name = pData.name!;
-  user?.age = pData.age!;
-  user?.gender = pData.gender!;
-  user?.postCode = pData.postalCode!;
-
-  user?.save();
 }
