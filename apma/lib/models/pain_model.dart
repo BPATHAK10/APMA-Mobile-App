@@ -1,18 +1,13 @@
-import 'package:hive/hive.dart';
-
-part 'pain_model.g.dart';
-
-@HiveType(typeId: 1)
-class Pain extends HiveObject {
-  @HiveField(0)
+class Pain{
   late DateTime date;
-
-  @HiveField(1)
   late String type;
-
-  @HiveField(2)
   late double intensity;
-
-  @HiveField(3)
   late bool hasMedication; 
+
+  Pain(DateTime d, String t, double i, bool m){
+    date = d;
+    type = t;
+    intensity = i;
+    hasMedication = m;
+  }
 }

@@ -5,6 +5,8 @@ import 'package:apma/screens/sleep_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/screens/pain_track_screen.dart';
 import 'package:apma/screens/energy_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:apma/Boxes/boxes.dart';
 
 class CustomTile extends StatelessWidget {
  CustomTile({Key? key, required this.title}) : super(key: key);
@@ -22,6 +24,8 @@ class CustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userEmail = Provider.of<String>(context,listen:false);
+    final user = Boxes.getUsers().get(userEmail);
     return 
     Column(
       mainAxisSize: MainAxisSize.max,
@@ -32,9 +36,10 @@ class CustomTile extends StatelessWidget {
             onTap: () async {
               await Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => maptonavigation[title],
-                ),
+                MaterialPageRoute(builder: (context) => Provider<String>(
+                    create: (context) => user!.email,
+                    child: maptonavigation[title])
+                )
               );
             },
             child: Center(

@@ -2,8 +2,12 @@ import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/login_screen.dart';
 import 'package:apma/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:apma/Boxes/boxes.dart';
 
 Widget showDrawer(BuildContext context){
+  final userEmail = Provider.of<String>(context,listen:false);
+  final user = Boxes.getUsers().get(userEmail);
   return  Drawer(
     child: ListView(
       children: <Widget>[
@@ -15,7 +19,10 @@ Widget showDrawer(BuildContext context){
           onTap: (){
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context)=> HomeScreen())
+                MaterialPageRoute(builder: (context) => Provider<String>(
+                    create: (context) => user!.email,
+                    child: HomeScreen())
+                )
             );
           }  
         ),
@@ -29,7 +36,10 @@ Widget showDrawer(BuildContext context){
           onTap: (){
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context)=> SettingScreen())
+                MaterialPageRoute(builder: (context) => Provider<String>(
+                    create: (context) => user!.email,
+                    child: const SettingScreen())
+                )
             );
           } 
         ),
@@ -38,7 +48,7 @@ Widget showDrawer(BuildContext context){
           onTap: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context)=> LoginScreen())
+              MaterialPageRoute(builder: (context)=>const LoginScreen())
             ); 
           },
         ),

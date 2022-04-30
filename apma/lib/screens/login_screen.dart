@@ -1,6 +1,6 @@
 import 'package:apma/models/user_model.dart';
 import 'package:apma/screens/signup_screen.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:apma/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/Boxes/boxes.dart';
@@ -163,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      CupertinoPageRoute(
+                      MaterialPageRoute(
                         builder: (context) => SignUpScreen(),
                       ),
                     );

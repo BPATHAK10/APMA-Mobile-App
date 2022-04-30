@@ -24,7 +24,7 @@ class _ExerciseTrackState extends State<ExerciseTrack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar(context,'Energy'),
+      appBar: showAppBar(context,'Exercise'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(5, 10, 5, 0),

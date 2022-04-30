@@ -1,4 +1,5 @@
 import 'package:apma/Boxes/boxes.dart';
+import 'package:apma/models/pain_model.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,8 @@ class PainTrack extends StatefulWidget {
 
 class _PainTrackState extends State<PainTrack> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
+  DateTime? _selectedDay;
+  late DateTime recordDate;
   late String dropDownValue = "Aching";
   late double sliderValue = 0;
   late bool checkboxListTileValue = false;
@@ -53,6 +56,12 @@ class _PainTrackState extends State<PainTrack> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    recordDate = DateTime.now();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final userEmail = Provider.of<String>(context,listen:false);
     final user = Boxes.getUsers().get(userEmail);
@@ -71,13 +80,27 @@ class _PainTrackState extends State<PainTrack> {
                 calendarFormat : _calendarFormat,
                 firstDay: DateTime.utc(2020, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(),
+                focusedDay: recordDate,
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      recordDate = focusedDay;
+                    });
+                  }
+                },
                 onFormatChanged: (format) {
                   if (_calendarFormat != format) {
                     setState(() {
                       _calendarFormat = format;
                     });
                   }
+                },
+                onPageChanged: (focusedDay) {
+                  recordDate = focusedDay;
                 },
               ),
               const SizedBox(height: 30,),
@@ -157,6 +180,18 @@ class _PainTrackState extends State<PainTrack> {
                       ),
                       child: const Text('Done'),
                       onPressed: (){
+                        print (recordDate);
+                        print (sliderValue);
+                        print (dropDownValue);
+                        print (checkboxListTileValue);
+                        Pain painData = Pain();
+                        painData.date = recordDate;
+                        painData.intensity = sliderValue;
+                        painData.type = dropDownValue;
+                        painData.hasMedication = checkboxListTileValue ;
+                        if (user!=null){
+                          user.pains?.add(painData);
+                        }
                       },
                     )
                   ]

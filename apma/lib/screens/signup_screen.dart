@@ -2,10 +2,8 @@ import 'package:apma/models/user_model.dart';
 import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:apma/Boxes/boxes.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {

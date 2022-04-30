@@ -1,23 +1,25 @@
+import 'package:apma/models/mediacation_model.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:apma/Boxes/boxes.dart';
 
 class Medicine {
   late String name;
   late String doseUnit;
-  late String dosage;
+  late double dosage;
   late DateTime expiryDate;
   late int frequency;
 
-  Medicine(name, doseUnit, dose, date, freq){
-    name = name;
-    doseUnit = doseUnit;
+  Medicine(medicName, unitDose, dose, date, freq){
+    name = medicName;
+    doseUnit = unitDose;
     dosage = dose;
     expiryDate = date;
     frequency = freq;
   }
 }
-
 
 class MedicTrack extends StatefulWidget {
   MedicTrack({Key? key}) : super(key: key);
@@ -27,28 +29,44 @@ class MedicTrack extends StatefulWidget {
 }
 
 class _MedicTrackState extends State<MedicTrack> {
-
-  Future<List<Medicine>> getAllMedicines() async{
-    late List<Medicine> medicinesData = [];
-    medicinesData.add(Medicine('Agomelatine', 'ml', 30, 2030/12/11, 3));
-    medicinesData.add(Medicine('Aspirin', 'ml', 30, 2030/12/11, 3));
-    medicinesData.add(Medicine('Botox', 'ml', 30, 2030/12/11, 3));
-    medicinesData.add(Medicine('Amitriptyline', 'ml', 30, 2030/12/11, 3));
-    medicinesData.add(Medicine('Baclofen', 'ml', 30, 2030/12/11, 3));
-    return medicinesData;
-  }
-  late Future<List<Medicine>> medicines;
+  final _formKey = GlobalKey<FormState>();
+  late List<Medicine> medicines = [];
+  var medicineList = <Medication>[];
   TextEditingController dateinput = TextEditingController();
+  DateTime expireDate = DateTime.now();
   String doseUnit = 'ml';  
+  int frequency = 1;
+  double dose = 0;
+  String name = "Dummy";
+
   @override
   void initState() {
     super.initState();
-    dateinput.text = ""; //set the initial value of text field
-    medicines = getAllMedicines();
+    dateinput.text = ""; 
+    medicines.add(Medicine('Agomelatine', 'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine('Aspirin', 'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine('Botox', 'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine('Amitriptyline', 'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine('Baclofen', 'ml', 30, DateTime(2030,12,11), 3));
   }
   
   @override
   Widget build(BuildContext context) {
+    final _userEmail = Provider.of<String>(context, listen: false);
+    final user = Boxes.getUsers().get(_userEmail);
+    final userMedicine = Boxes.getMedications();
+    print("length" + '${user?.medicines?.length}');
+
+    if (user!=null){
+      user.medicines?.forEach((element) {
+        var newMedicine = Medicine(element.name,"ml",element.dosage,element.expiryDate,element.frequency);
+        medicineList.add(userMedicine.get(element) as Medication); 
+        setState(() {
+          medicines.add(newMedicine);
+        });
+      });
+    }
+
     return Scaffold(
       appBar: showAppBar(context,'Medics'),
       floatingActionButton: FloatingActionButton(
@@ -63,67 +81,82 @@ class _MedicTrackState extends State<MedicTrack> {
                 title: const Text('Add Medicine'),
                 content: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Name of Medicine',
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Name of Medicine',
+                          ),
+                          onChanged: (text){
+                            name = text;
+                          },
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Flexible(
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                labelText: 'User Dosage',
+                        Row(
+                          children: [
+                            Flexible(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                  labelText: 'User Dosage',
+                                ),
+                                keyboardType: TextInputType.number,
+                                onChanged: (value){
+                                  dose = double.parse(value);
+                                },
                               ),
                             ),
+                            DropdownButton(
+                              hint: const Text("Dose Unit"),
+                              value: doseUnit,
+                              items: ['gm','ml'].map((String item) {
+                                return DropdownMenuItem(
+                                  value: item,
+                                  child: Text(item),
+                                );
+                              }).toList() ,
+                              onChanged:(String? doseUnitName){
+                                setState(() {
+                                  doseUnit= doseUnitName!;
+                                });
+                              }
+                            )
+                          ],
+                        ),
+                        
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'Frequency',
                           ),
-                          DropdownButton(
-                            hint: const Text("Dose Unit"),
-                            value: doseUnit,
-                            items: ['gm','ml'].map((String item) {
-                              return DropdownMenuItem(
-                                value: item,
-                                child: Text(item),
-                              );
-                            }).toList() ,
-                            onChanged:(String? doseUnitName){
-                              setState(() {
-                                doseUnit= doseUnitName!;
-                              });
+                          keyboardType: TextInputType.number,
+                          onChanged: (value){
+                            frequency = int.parse(value);
+                          },
+                        ),
+                        TextField(
+                          controller: dateinput,
+                          decoration: const InputDecoration( 
+                            labelText: "Enter expiry Date" //label text of field
+                          ),
+                          readOnly: true, 
+                          onTap: () async {
+                            DateTime ?pickedDate = await showDatePicker(
+                                context: context, initialDate: DateTime.now(),
+                                firstDate: DateTime(2020),
+                                lastDate: DateTime(2030)
+                            );
+                            if(pickedDate != null ){
+                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); 
+                                setState(() {
+                                  expireDate = pickedDate;
+                                  dateinput.text = formattedDate; //set output date to TextField value. 
+                                });
+                            }else{
                             }
-                          )
-                        ],
-                      ),
-                      
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Frequency',
+                          },
                         ),
-                      ),
-                      TextField(
-                        controller: dateinput,
-                        decoration: const InputDecoration( 
-                          labelText: "Enter expiry Date" //label text of field
-                        ),
-                        readOnly: true, 
-                        onTap: () async {
-                          DateTime ?pickedDate = await showDatePicker(
-                              context: context, initialDate: DateTime.now(),
-                              firstDate: DateTime(2020),
-                              lastDate: DateTime(2030)
-                          );
-                          if(pickedDate != null ){
-                              String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); 
-                              setState(() {
-                                dateinput.text = formattedDate; //set output date to TextField value. 
-                              });
-                          }else{
-                          }
-                        },
-                      ),
-                    ]
+                      ]
+                    ),
                   ),
                 ),
                 actions: [
@@ -137,6 +170,7 @@ class _MedicTrackState extends State<MedicTrack> {
                     ),
                     child: const Text('Cancel'),
                     onPressed: (){
+                      Navigator.pop(context);
                     },
                   ),
                   ElevatedButton(
@@ -149,6 +183,26 @@ class _MedicTrackState extends State<MedicTrack> {
                     ),
                     child: const Text('Done'),
                     onPressed: (){
+                      Navigator.pop(context);
+                      print (dose);
+                      print (expireDate);
+                      print (name);
+                      print (frequency);
+                      Medication medication = Medication();
+                      medication.dosage = dose;
+                      medication.expiryDate = expireDate;
+                      medication.name = name;
+                      medication.frequency = frequency;
+                      medication.save();
+                      
+                      setState(() {
+                        medicines.add(Medicine(name,"ml",dose,expireDate,frequency));
+                        user!.medicines?.add(medication);
+                        user.save();
+                      });
+                      print("name is " );
+                      print (user?.name);
+                      
                     },
                   )
                 ],
@@ -157,32 +211,24 @@ class _MedicTrackState extends State<MedicTrack> {
           );
         }
       ),
-      body: FutureBuilder<List<Medicine>>(
-        future: medicines,
-        builder: (context, snapshot){
-          if (snapshot.hasData){
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (BuildContext context, int index){
-                final currentMedic = snapshot.data![index];
-                return ExpansionTile(
-                  title: Text(currentMedic.name),
-                  children: [
-                    Text(currentMedic.dosage + currentMedic.doseUnit),
-                    Text('${currentMedic.frequency}' + ' times'),
-                    Text('${currentMedic.expiryDate}'),
-                  ],
-                );
-              }
+      body: (medicines.isNotEmpty)?
+        ListView.builder(
+          itemCount: medicines.length,
+          itemBuilder: (BuildContext context, int index){
+            final currentMedic = medicines[index];
+            return ExpansionTile(
+              title: Text(currentMedic.name),
+              children: [
+                Text('${currentMedic.dosage}' + currentMedic.doseUnit),
+                Text('${currentMedic.frequency}' + ' times'),
+                Text('${currentMedic.expiryDate}'),
+              ],
             );
           }
-          else{
-              return const Center(
-                child:Text("No Medicine. Click 'Add' to add new")
-              );
-          }
-        }
-      )
+        ): 
+        const Center(
+          child:Text("No Medicine. Click 'Add' to add new")
+        )
     );                
   }
 }

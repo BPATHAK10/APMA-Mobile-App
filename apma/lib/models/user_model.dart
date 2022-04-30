@@ -1,3 +1,5 @@
+import 'package:apma/models/mediacation_model.dart';
+import 'package:apma/models/pain_model.dart';
 import 'package:hive/hive.dart';
 part 'user_model.g.dart';
 
@@ -25,9 +27,9 @@ class User extends HiveObject {
     late String postCode;
 
     @HiveField(7) 
-    HiveList? pains;
+    List<Pain>? pains;
 
     @HiveField(8)
-    HiveList? medicines;
+    List<Medicine>? medicines;
 
 }
