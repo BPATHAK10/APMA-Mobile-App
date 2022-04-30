@@ -94,7 +94,7 @@ class _ProfileTabState extends State<ProfileTab> {
     
     profileData.updateProfileData(user!.name, user.age, user.gender,user.postCode);
     
-    initialProfileData.updateProfileData(user!.name, user.age, user.gender,user.postCode);
+    initialProfileData.updateProfileData(user.name, user.age, user.gender,user.postCode);
     print("initial profile data is::");
     initialProfileData.display();
 
