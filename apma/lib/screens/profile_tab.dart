@@ -1,7 +1,48 @@
 import 'package:apma/Boxes/boxes.dart';
 import 'package:apma/models/pain_model.dart';
+import 'package:apma/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+class ProfileData {
+  late String name;
+  late String age;
+  late String gender;
+  late String postalCode;
+
+  ProfileData(this.name, this.age, this.gender, this.postalCode);
+
+  void display() {
+    print(name);
+    print(age);
+    print(gender);
+    print(postalCode);
+  }
+
+  void updateProfileData(
+      String name, String age, String gender, String postalCode) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.postalCode = postalCode;
+  }
+
+  // void updateName(String? name) {
+  //   this.name = name;
+  // }
+
+  // void updateAge(String? age) {
+  //   this.age = age;
+  // }
+
+  // void updateGender(String? gender) {
+  //   this.gender = gender;
+  // }
+
+  // void updatePostalCode(String? postalCode) {
+  //   this.postalCode = postalCode;
+  // }
+}
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -11,15 +52,22 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
-  final TextEditingController _controller = TextEditingController();
+  // bool isEdit = false;
+  late ProfileData profileData;
+  late ProfileData initialProfileData;
+
+  // final TextEditingController _nameController = TextEditingController();
 
   final genderOptions = ["Male", "Female", "Non-binary", "Prefer not to say"];
   String? selectedGender;
 
-
   @override
   void initState() {
     super.initState();
+    profileData = ProfileData('', '', '', '');
+    initialProfileData = ProfileData('', '', '', '');
+    // _nameController.text = "";
+
     // _controller.addListener(() {
 
     // })
@@ -33,8 +81,8 @@ class _ProfileTabState extends State<ProfileTab> {
       );
 
   TextStyle myTextStyle = const TextStyle(
-      fontSize: 15,
-      // fontWeight: FontWeight.bold,
+    fontSize: 15,
+    // fontWeight: FontWeight.bold,
   );
 
   @override
@@ -42,10 +90,21 @@ class _ProfileTabState extends State<ProfileTab> {
     final _userEmail = Provider.of<String>(context, listen: false);
 
     final user = Boxes.getUsers().get(_userEmail);
+    print(user.toString());
+    
+    profileData.updateProfileData(user!.name, user.age, user.gender,user.postCode);
+    
+    initialProfileData.updateProfileData(user!.name, user.age, user.gender,user.postCode);
+    print("initial profile data is::");
+    initialProfileData.display();
 
-    print(user?.age);
-    print(user?.name);
-    print(user?.gender);
+    // profileData.updateProfileData(
+    //     user?.name, user?.age, user?.gender, user?.postCode);
+
+    // print("inside build");
+    // profileData.display();
+
+    // selectedGender  = initialProfileData.gender;
 
     return SingleChildScrollView(
       child: Center(
@@ -55,49 +114,63 @@ class _ProfileTabState extends State<ProfileTab> {
               height: 20,
             ),
             SizedBox(
-                // width: MediaQuery.of(context).size.width,
-                child: CircleAvatar(
+              // width: MediaQuery.of(context).size.width,
+              child: CircleAvatar(
                   radius: 50.0,
                   backgroundColor: Colors.white,
                   child: Image.asset('assets/images/avatar_default.png')),
-                ),
-             Padding(
+            ),
+            Padding(
               padding: EdgeInsets.all(15.0),
               child: SizedBox(
-                // width: MediaQuery.of(context).size.width,
-                child: Text(_userEmail,
-                style: TextStyle(
-                  fontSize: 30
-                ),)
-              ),
+                  // width: MediaQuery.of(context).size.width,
+                  child: Text(
+                _userEmail,
+                style: TextStyle(fontSize: 30),
+              )),
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
                 children: <Widget>[
-                  Expanded(child: Text(
+                  Expanded(
+                      child: Text(
                     "Name",
                     style: myTextStyle,
-                    )),
+                  )),
                   Expanded(
                       child: TextFormField(
-                    // controller: _controller,
+                    initialValue: initialProfileData.name,
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                    // controller: _nameController,
+                    onChanged: (value) => profileData.name = value,
                     decoration: const InputDecoration(
-    
-                        border: UnderlineInputBorder(), labelText: "Enter Name"),
+                        border: UnderlineInputBorder(),
+                        labelText: "Enter Name"),
                   ))
                 ],
               ),
             ),
-            
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
                 children: <Widget>[
-                  Expanded(child: Text("Age",style: myTextStyle,)),
+                  Expanded(
+                      child: Text(
+                    "Age",
+                    style: myTextStyle,
+                  )),
                   Expanded(
                       child: TextFormField(
-                    // controller: _controller,
+                    initialValue: initialProfileData.age,
+                    onChanged: (value) {
+                      profileData.age = value;
+                    },
                     decoration: const InputDecoration(
                         border: UnderlineInputBorder(), labelText: "Enter Age"),
                   ))
@@ -105,45 +178,25 @@ class _ProfileTabState extends State<ProfileTab> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(child: Text("Height",style: myTextStyle,)),
-                  Expanded(
-                      child: TextFormField(
-                    // controller: _controller,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(), labelText: "Enter Height"),
-                  ))
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(child: Text("Weight",style: myTextStyle,)),
-                  Expanded(
-                      child: TextFormField(
-                    // controller: _controller,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(), labelText: "Enter Weight"),
-                  ))
-                ],
-              ),
-            ),
-            Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: <Widget>[
-                    Expanded(child: Text("Gender",style: myTextStyle,)),
+                    Expanded(
+                        child: Text(
+                      "Gender",
+                      style: myTextStyle,
+                    )),
                     Expanded(
                         child: DropdownButton<String>(
                             isExpanded: true,
                             hint: const Text("Select gender"),
                             value: selectedGender,
-                            onChanged: (value) =>
-                                setState(() => this.selectedGender = value),
+                            onChanged: (value) {
+                              profileData.gender = value!;
+                              setState(() {
+                                selectedGender = value;
+                              });
+                            },
                             items: genderOptions.map(buildMenuItem).toList()))
                   ],
                 )),
@@ -151,24 +204,30 @@ class _ProfileTabState extends State<ProfileTab> {
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: <Widget>[
-                    Expanded(child: Text("Postal Code",style: myTextStyle,)),
+                    Expanded(
+                        child: Text(
+                      "Postal Code",
+                      style: myTextStyle,
+                    )),
                     Expanded(
                         child: TextFormField(
-                      // controller: _controller,
+                      initialValue: initialProfileData.postalCode,
+                      onChanged: (value) => profileData.postalCode = value,
                       decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "Enter Postal code"),
                     ))
                   ],
-                )
-              ),
-              const SizedBox(height: 20,),
-              Container(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                child: Row(
+                )),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+              child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget> [
+                  children: <Widget>[
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: const Color(0xFF671616),
@@ -178,8 +237,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         minimumSize: const Size(100, 50),
                       ),
                       child: const Text('Cancel'),
-                      onPressed: (){
-                      },
+                      onPressed: () {},
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -190,12 +248,34 @@ class _ProfileTabState extends State<ProfileTab> {
                         minimumSize: const Size(100, 50),
                       ),
                       child: const Text('Done'),
-                      onPressed: (){
+                      onPressed: () {
+                        print("inside edit profile");
+                        profileData.display();
+
+                        profileData.name != initialProfileData.name ?
+                          user.name = profileData.name
+                          :
+                          user.name = initialProfileData.name;
+
+                        profileData.age != initialProfileData.age ?
+                          user.age = profileData.age
+                          :
+                          user.age = initialProfileData.age;
+                        
+                        profileData.gender != initialProfileData.gender ?
+                          user.gender = profileData.gender
+                          :
+                          user.gender = initialProfileData.gender;
+                        profileData.postalCode != initialProfileData.postalCode ?
+                          user.gender = profileData.gender
+                          :
+                          user.gender = initialProfileData.gender;
+
+                        user.save();
                       },
                     )
-                  ]
-                ),  
-              ),
+                  ]),
+            ),
           ],
         ),
       ),

@@ -205,11 +205,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final user = User()
       ..email = email
       ..password = password
-      ..name = "John Doe"
-      ..contactNumber = "83745983457"
-      ..age = "18"
-      ..gender = "Male"
-      ..postCode = "12345";
+      ..name = ""
+      ..age = ""
+      ..gender = ""
+      ..postCode = "";
       
 
     final userBox = Boxes.getUsers();
