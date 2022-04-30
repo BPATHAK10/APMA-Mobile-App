@@ -24,8 +24,8 @@ class UserAdapter extends TypeAdapter<User> {
       ..age = fields[4] as String
       ..gender = fields[5] as String
       ..postCode = fields[6] as String
-      ..pains = (fields[7] as HiveList?)?.castHiveList()
-      ..medicines = (fields[8] as HiveList?)?.castHiveList();
+      ..pains = (fields[7] as List).cast<Pain>()
+      ..medicines = (fields[8] as List).cast<Medicine>();
   }
 
   @override

@@ -20,7 +20,7 @@ class _PainTrackState extends State<PainTrack> {
   late double sliderValue = 0;
   late bool checkboxListTileValue = false;
   var painIntensity = [
-    "No Pain",
+    "Little",
     "Very Mild",
     "Discomforting",
     "Tolerable",
@@ -63,8 +63,8 @@ class _PainTrackState extends State<PainTrack> {
 
   @override
   Widget build(BuildContext context) {
-    final userEmail = Provider.of<String>(context,listen:false);
-    final user = Boxes.getUsers().get(userEmail);
+    final _userEmail = Provider.of<String>(context, listen: false);
+    final user = Boxes.getUsers().get(_userEmail);
 
     return Scaffold(
       appBar: showAppBar(context,'Pain'),
@@ -180,17 +180,9 @@ class _PainTrackState extends State<PainTrack> {
                       ),
                       child: const Text('Done'),
                       onPressed: (){
-                        print (recordDate);
-                        print (sliderValue);
-                        print (dropDownValue);
-                        print (checkboxListTileValue);
-                        Pain painData = Pain();
-                        painData.date = recordDate;
-                        painData.intensity = sliderValue;
-                        painData.type = dropDownValue;
-                        painData.hasMedication = checkboxListTileValue ;
+                        Pain painData = Pain(recordDate, dropDownValue, sliderValue,checkboxListTileValue);
                         if (user!=null){
-                          user.pains?.add(painData);
+                          user.pains.add(painData);
                         }
                       },
                     )

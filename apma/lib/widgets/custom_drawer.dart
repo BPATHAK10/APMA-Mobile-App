@@ -1,6 +1,7 @@
 import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/login_screen.dart';
 import 'package:apma/screens/settings_screen.dart';
+import 'package:apma/screens/history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:apma/Boxes/boxes.dart';
@@ -29,6 +30,13 @@ Widget showDrawer(BuildContext context){
         ListTile(
           title: const Text('My History'),
           onTap: () {
+            Navigator.pushReplacement(
+              context,
+                MaterialPageRoute(builder: (context) => Provider<String>(
+                    create: (context) => user!.email,
+                    child: const HistoryScreen())
+                )
+            );
           },
         ),
         ListTile(

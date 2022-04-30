@@ -1,25 +1,9 @@
-import 'package:apma/models/mediacation_model.dart';
+import 'package:apma/models/medicine_model.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:apma/Boxes/boxes.dart';
-
-class Medicine {
-  late String name;
-  late String doseUnit;
-  late double dosage;
-  late DateTime expiryDate;
-  late int frequency;
-
-  Medicine(medicName, unitDose, dose, date, freq){
-    name = medicName;
-    doseUnit = unitDose;
-    dosage = dose;
-    expiryDate = date;
-    frequency = freq;
-  }
-}
 
 class MedicTrack extends StatefulWidget {
   MedicTrack({Key? key}) : super(key: key);
@@ -30,8 +14,7 @@ class MedicTrack extends StatefulWidget {
 
 class _MedicTrackState extends State<MedicTrack> {
   final _formKey = GlobalKey<FormState>();
-  late List<Medicine> medicines = [];
-  var medicineList = <Medication>[];
+  List<Medicine> medicines = [];
   TextEditingController dateinput = TextEditingController();
   DateTime expireDate = DateTime.now();
   String doseUnit = 'ml';  
@@ -54,13 +37,11 @@ class _MedicTrackState extends State<MedicTrack> {
   Widget build(BuildContext context) {
     final _userEmail = Provider.of<String>(context, listen: false);
     final user = Boxes.getUsers().get(_userEmail);
-    final userMedicine = Boxes.getMedications();
-    print("length" + '${user?.medicines?.length}');
 
+    print(user?.medicines.length);
     if (user!=null){
-      user.medicines?.forEach((element) {
+      user.medicines.forEach((element) {
         var newMedicine = Medicine(element.name,"ml",element.dosage,element.expiryDate,element.frequency);
-        medicineList.add(userMedicine.get(element) as Medication); 
         setState(() {
           medicines.add(newMedicine);
         });
@@ -183,26 +164,14 @@ class _MedicTrackState extends State<MedicTrack> {
                     ),
                     child: const Text('Done'),
                     onPressed: (){
-                      Navigator.pop(context);
-                      print (dose);
-                      print (expireDate);
-                      print (name);
-                      print (frequency);
-                      Medication medication = Medication();
-                      medication.dosage = dose;
-                      medication.expiryDate = expireDate;
-                      medication.name = name;
-                      medication.frequency = frequency;
-                      medication.save();
-                      
+                      Medicine medication = Medicine(name,"ml",dose,expireDate,frequency);
                       setState(() {
-                        medicines.add(Medicine(name,"ml",dose,expireDate,frequency));
-                        user!.medicines?.add(medication);
+                        medicines.add(medication);
+                        user!.medicines.add(medication);
                         user.save();
                       });
-                      print("name is " );
-                      print (user?.name);
-                      
+                      print (user?.medicines.length);
+                      Navigator.pop(context);
                     },
                   )
                 ],
