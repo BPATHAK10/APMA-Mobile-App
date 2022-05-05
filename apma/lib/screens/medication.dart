@@ -26,13 +26,67 @@ class _MedicTrackState extends State<MedicTrack> {
   void initState() {
     super.initState();
     dateinput.text = ""; 
-    medicines.add(Medicine('Agomelatine', 'ml', 30, DateTime(2030,12,11), 3));
-    medicines.add(Medicine('Aspirin', 'ml', 30, DateTime(2030,12,11), 3));
-    medicines.add(Medicine('Botox', 'ml', 30, DateTime(2030,12,11), 3));
-    medicines.add(Medicine('Amitriptyline', 'ml', 30, DateTime(2030,12,11), 3));
-    medicines.add(Medicine('Baclofen', 'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Agomelatine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Amantadine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Amitriptyline",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Baclofen",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Capsaicin",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Carbamazepine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Celecoxib",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Citalopram",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Clomipramine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Clonidine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Codeine",'ml', 30, DateTime(2030,12,11), 3));
+    
+    medicines.add(Medicine("Desvenlafaxine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Diclofenac",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Dothiepin",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Doxepin",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Escitalopram",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Duloxetine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Fentanyl",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Fluoxetine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Fluvoxamine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Gabapentin",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Hydromorphone",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Ibuprofen",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Imiprimine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Ketamine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Lamotrigine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Lignocaine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Lyrica",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Magnesium",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Meloxicam",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Memantine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Methadone",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Mianserin",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Mirtazapine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Moclobemide",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Morphine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Naproxen",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Nortriptyline",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Orphenadrine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Oxycodone",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Oxcarbamazepine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Palmitoylethanolamide",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Paracetamol",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Palexia",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Paroxetine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Phenelzine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Pregabalin",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Reboxetine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Sertraline",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Tapentadol",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Topiramate",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Topiramate",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Tramandol",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Tranylcypromine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Trimipramine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Valproate",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Venlafaxine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Venlafaxine",'ml', 30, DateTime(2030,12,11), 3));
+    medicines.add(Medicine("Vortioxetine",'ml', 30, DateTime(2030,12,11), 3));
   }
-  
   @override
   Widget build(BuildContext context) {
     final _userEmail = Provider.of<String>(context, listen: false);
@@ -166,11 +220,10 @@ class _MedicTrackState extends State<MedicTrack> {
                     onPressed: (){
                       Medicine medication = Medicine(name,"ml",dose,expireDate,frequency);
                       setState(() {
-                        medicines.add(medication);
                         user!.medicines.add(medication);
                         user.save();
                       });
-                      print (user?.medicines.length);
+                        // medicines.add(medication);
                       Navigator.pop(context);
                     },
                   )
@@ -187,6 +240,7 @@ class _MedicTrackState extends State<MedicTrack> {
             final currentMedic = medicines[index];
             return ExpansionTile(
               title: Text(currentMedic.name),
+              expandedAlignment: Alignment.topLeft,
               children: [
                 Text('${currentMedic.dosage}' + currentMedic.doseUnit),
                 Text('${currentMedic.frequency}' + ' times'),

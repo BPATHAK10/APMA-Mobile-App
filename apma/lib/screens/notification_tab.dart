@@ -47,7 +47,7 @@ class _NotificationTabState extends State<NotificationTab> {
                   ),
                 ),
               ),
-              Text('${currentMed.dosage}')
+              Text("Consume " + '${currentMed.dosage}' + "ml")
             ]
           ),
         );
