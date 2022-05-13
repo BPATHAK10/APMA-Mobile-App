@@ -25,7 +25,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..postCode = fields[6] as String
       ..pains = (fields[7] as List).cast<Pain>()
       ..medicines = (fields[8] as List).cast<Medicine>()
-      ..foodIllness = (fields[12] as List).cast<dynamic>();
+      ..foodIllness = (fields[14] as List).cast<String>();
   }
 
   @override
@@ -48,7 +48,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..write(obj.pains)
       ..writeByte(8)
       ..write(obj.medicines)
-      ..writeByte(12)
+      ..writeByte(14)
       ..write(obj.foodIllness);
   }
 

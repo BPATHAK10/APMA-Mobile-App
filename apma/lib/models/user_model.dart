@@ -29,7 +29,7 @@ class User extends HiveObject {
     @HiveField(8)
     List<Medicine> medicines=[];
 
-    @HiveField(12)
-    List foodIllness = [];
+    @HiveField(14)
+    List<String> foodIllness = [];
 
 }

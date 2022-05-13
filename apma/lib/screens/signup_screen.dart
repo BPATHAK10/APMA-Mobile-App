@@ -208,7 +208,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ..name = ""
       ..age = ""
       ..gender = ""
-      ..postCode = "";
+      ..postCode = ""
+      ..foodIllness = [];
       
 
     final userBox = Boxes.getUsers();

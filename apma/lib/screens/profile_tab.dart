@@ -10,7 +10,7 @@ class ProfileData {
   late String age;
   late String gender;
   late String postalCode;
-  late List foodIllness;
+  late List<String> foodIllness;
 
   ProfileData(this.name, this.age, this.gender, this.postalCode, this.foodIllness);
 
@@ -90,8 +90,6 @@ class _ProfileTabState extends State<ProfileTab> {
     MultiSelectItem("Migraine & cluster headaches", "Migraine & cluster headaches"),
     MultiSelectItem("Small intestinal Bacterial Overgrowth", "Small intestinal Bacterial Overgrowth"),
   ];
-
-  var _selectedFoodIllnessItems = [];  
 
   @override
   void initState() {
@@ -288,8 +286,8 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
                       itemsTextStyle: TextStyle(color: Colors.black),
                       onConfirm: (results){
-                        print("selected are "+results.toString());
-                        profileData.foodIllness = results;
+                        print(results);
+                        profileData.foodIllness = results.map((e) => e.toString()).toList();
                       },
                     ))
                   ],
