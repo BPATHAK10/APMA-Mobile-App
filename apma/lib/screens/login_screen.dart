@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(color: Colors.blue, fontSize: 18),
                   ),
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width / 2 - 50),
+                SizedBox(width: MediaQuery.of(context).size.width / 2 - 80),
                 TextButton(
                   onPressed: () {
                     Navigator.pushReplacement(

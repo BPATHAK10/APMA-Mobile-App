@@ -24,13 +24,14 @@ class UserAdapter extends TypeAdapter<User> {
       ..gender = fields[5] as String
       ..postCode = fields[6] as String
       ..pains = (fields[7] as List).cast<Pain>()
-      ..medicines = (fields[8] as List).cast<Medicine>();
+      ..medicines = (fields[8] as List).cast<Medicine>()
+      ..foodIllness = (fields[12] as List).cast<dynamic>();
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.email)
       ..writeByte(1)
@@ -46,7 +47,9 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(7)
       ..write(obj.pains)
       ..writeByte(8)
-      ..write(obj.medicines);
+      ..write(obj.medicines)
+      ..writeByte(12)
+      ..write(obj.foodIllness);
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:apma/screens/exercise_screen.dart';
+import 'package:apma/screens/movement_screen.dart';
 import 'package:apma/screens/food_track.dart';
 import 'package:apma/screens/medication.dart';
 import 'package:apma/screens/sleep_screen.dart';
