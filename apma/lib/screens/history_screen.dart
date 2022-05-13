@@ -1,7 +1,7 @@
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:apma/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-
+import 'package:apma/constants.dart';
 import 'package:apma/Boxes/boxes.dart';
 import 'package:provider/provider.dart';
 import 'package:apma/models/pain_model.dart';
@@ -52,7 +52,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 children: <Widget> [
                   Expanded(
                     child:Text(
-                      '${currentPain.intensity} + ${currentPain.type}',
+                      painItems[(currentPain.intensity).toInt()] +' '+ currentPain.type,
                       style:const  TextStyle(
                         fontSize: 16,
                       ),

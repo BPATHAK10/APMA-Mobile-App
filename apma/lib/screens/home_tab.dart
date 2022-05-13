@@ -32,7 +32,7 @@ class _HomeTabState extends State<HomeTab> {
             CustomTile(title: "Medications"),
             CustomTile(title: "Energy",),
             CustomTile(title: "Food"),
-            CustomTile(title: "Exercise",),
+            CustomTile(title: "Movement",),
             CustomTile(title: "Sleep",),
           ],
         )
