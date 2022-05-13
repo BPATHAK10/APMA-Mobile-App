@@ -17,8 +17,8 @@ Widget showDrawer(BuildContext context){
         ),
         ListTile(
           title: const Text('Home'),
-          onTap: (){
-            Navigator.pushReplacement(
+          onTap: ()async{
+            await Navigator.pushReplacement(
               context,
                 MaterialPageRoute(builder: (context) => Provider<String>(
                     create: (context) => user!.email,
@@ -29,8 +29,8 @@ Widget showDrawer(BuildContext context){
         ),
         ListTile(
           title: const Text('My History'),
-          onTap: () {
-            Navigator.pushReplacement(
+          onTap: () async{
+            await Navigator.pushReplacement(
               context,
                 MaterialPageRoute(builder: (context) => Provider<String>(
                     create: (context) => user!.email,
@@ -41,8 +41,8 @@ Widget showDrawer(BuildContext context){
         ),
         ListTile(
           title: const Text('Settings'),
-          onTap: (){
-            Navigator.pushReplacement(
+          onTap: () async{
+            await Navigator.pushReplacement(
               context,
                 MaterialPageRoute(builder: (context) => Provider<String>(
                     create: (context) => user!.email,

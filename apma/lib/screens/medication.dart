@@ -1,4 +1,5 @@
 import 'package:apma/models/medicine_model.dart';
+import 'package:apma/screens/home_screen.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +38,6 @@ class _MedicTrackState extends State<MedicTrack> {
     medicines.add(Medicine("Clomipramine",'ml', 30, DateTime(2030,12,11), 3));
     medicines.add(Medicine("Clonidine",'ml', 30, DateTime(2030,12,11), 3));
     medicines.add(Medicine("Codeine",'ml', 30, DateTime(2030,12,11), 3));
-    
     medicines.add(Medicine("Desvenlafaxine",'ml', 30, DateTime(2030,12,11), 3));
     medicines.add(Medicine("Diclofenac",'ml', 30, DateTime(2030,12,11), 3));
     medicines.add(Medicine("Dothiepin",'ml', 30, DateTime(2030,12,11), 3));
@@ -91,7 +91,7 @@ class _MedicTrackState extends State<MedicTrack> {
   Widget build(BuildContext context) {
     final _userEmail = Provider.of<String>(context, listen: false);
     final user = Boxes.getUsers().get(_userEmail);
-
+  
     print(user?.medicines.length);
     if (user!=null){
       user.medicines.forEach((element) {
@@ -220,9 +220,9 @@ class _MedicTrackState extends State<MedicTrack> {
                     onPressed: (){
                       Medicine medication = Medicine(name,"ml",dose,expireDate,frequency);
                       setState(() {
-                        user!.medicines.add(medication);
-                        user.save();
                       });
+                      user!.medicines.add(medication);
+                      user.save();
                         // medicines.add(medication);
                       Navigator.pop(context);
                     },

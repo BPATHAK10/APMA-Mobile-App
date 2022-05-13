@@ -13,20 +13,23 @@ class NotificationTab extends StatefulWidget {
 class _NotificationTabState extends State<NotificationTab> {
 
   List<Medicine> medicines = [];
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final _userEmail = Provider.of<String>(context, listen: false);
     final user = Boxes.getUsers().get(_userEmail);
 
-    if (user!=null){
-      user.medicines.forEach((element) {
-        var newMedicine = Medicine(element.name,"ml",element.dosage,element.expiryDate,element.frequency);
-        setState(() {
-          medicines.add(newMedicine);
-        });
+    user?.medicines.forEach((element) {
+      var newMedicine = Medicine(element.name,"ml",element.dosage,element.expiryDate,element.frequency);
+      setState(() {
+        medicines.add(newMedicine);
       });
-    }
+    });
+
 
     return (medicines.isNotEmpty)?
     ListView.builder(

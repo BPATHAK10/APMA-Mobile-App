@@ -1,5 +1,6 @@
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:apma/constants.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class FoodTrack extends StatefulWidget {
@@ -10,15 +11,59 @@ class FoodTrack extends StatefulWidget {
 }
 
 class _FoodTrackState extends State<FoodTrack> {
-  late String dropDownValue = 'None';
+  late String whomDropDownValue = 'Alone';
+  late String moodDropDownValue = 'Happy';
+  late String symptomDropDownValue = 'None';
   CalendarFormat _calendarFormat = CalendarFormat.week;
+  late String _selectedTime = '';
+  late double hungerBeforeSliderValue = 0;
+  late double hungerAfterSliderValue = 0;
   late double sliderValue = 0;
-  var items = [
+  var whomItems = [
+    "Alone",
+    "Colleagues",
+    "Family",
+    "Friends",
+  ];
+  var moodItems = [
+    "Angry",
+    "Bored",
+    "Depressed",
+    "Happy",
+    "Neutral",
+    "Rushed",
+    "Tend",
+    "Tired",
+  ];
+  var symptomItems = [
     "None",
-    "1 time",
-    "2 times",
-    "3 times",
-    "More than 3 times",
+    "Anxiety",
+    "Asthma",
+    "Bloating",
+    "Constipation",
+    "Diarrhea",
+    "Eczema",
+    "Fatigue",
+    "Flushing skin", 
+    "Gas",
+    "Hay Fever",
+    "Headache",
+    "Heartburn",
+    "Hives",
+    "Indigestion",
+    "Insomnia",
+    "Jitters",
+    "Joint pain",
+    "Mouth Ulcers",
+    "Nausea",
+    "Nervousness",
+    "Rapid heartbeat",
+    "Rash",
+    "Reflux",  
+    "Restlessness",
+    "Sinus",
+    "Stomach upset",
+    "Vomiting",
   ];
   
   @override
@@ -45,19 +90,31 @@ class _FoodTrackState extends State<FoodTrack> {
                     });
                   }
                 },
-              ),            
-              
+              ),   
+              const SizedBox(height: 30,),
+              ElevatedButton(
+                onPressed: () async{
+                  final TimeOfDay? result =
+                  await showTimePicker(context: context, initialTime: TimeOfDay.now());
+                  if (result != null) {
+                    setState(() {
+                      _selectedTime = result.format(context);
+                    });
+                  }
+                }, 
+                child: const Text('Show Time Picker')
+              ),         
               const SizedBox(height:40),
-              const Text("How many times do you eat in a day?"),      
+              const Text("With whom did you eat?"),      
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: DropdownButton(
                   isExpanded: true,
                   iconSize: 24,
-                  hint: const Text("Frequency of Eating"),
-                  value: dropDownValue,
+                  hint: const Text("With whom did you eat?"),
+                  value: whomDropDownValue,
                   icon: const Icon(Icons.keyboard_arrow_down), 
-                  items: items.map((String items) {
+                  items: whomItems.map((String items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -65,17 +122,96 @@ class _FoodTrackState extends State<FoodTrack> {
                   }).toList(), 
                   onChanged: (String? newValue){
                     setState(() {
-                      dropDownValue = newValue!;
+                      whomDropDownValue = newValue!;
                     });
                   }
                 ),
               ),
               const SizedBox(height:40),
+              const Text("Mood Prior Eating"),      
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DropdownButton(
+                  isExpanded: true,
+                  iconSize: 24,
+                  hint: const Text("Mood Prior eating"),
+                  value: moodDropDownValue,
+                  icon: const Icon(Icons.keyboard_arrow_down), 
+                  items: moodItems.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(), 
+                  onChanged: (String? newValue){
+                    setState(() {
+                      moodDropDownValue = newValue!;
+                    });
+                  }
+                ),
+              ),
+              const SizedBox(height: 30,),
+              const Center(
+                child: Text('Huger Level') ,
+              ),
+              Slider(
+                min: 0,
+                max: 3,
+                divisions: 3,
+                value: hungerBeforeSliderValue,
+                onChanged: (newValue) {
+                  setState(() => hungerBeforeSliderValue = newValue);
+                },
+              ),
+              const SizedBox(height:40),
 
               TextFormField(
-                maxLines: 4,
+                maxLines: 1,
                 decoration: const InputDecoration(
-                  labelText: 'Describe yourself eating diet',
+                  labelText: 'What food did you eat',
+                ),
+              ),
+              const SizedBox(height:20),
+              TextFormField(
+                maxLines: 1,
+                decoration: const InputDecoration(
+                  labelText: 'What drinks did you consume',
+                ),
+              ),
+              const SizedBox(height: 30,),
+              const Center(
+                child: Text('Fullness Level') ,
+              ),
+              Slider(
+                min: 0,
+                max: 3,
+                divisions: 3,
+                value: hungerAfterSliderValue,
+                onChanged: (newValue) {
+                  setState(() => hungerAfterSliderValue = newValue);
+                },
+              ),
+              const SizedBox(height:40),
+              const Text("Symptoms After Eating"),      
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DropdownButton(
+                  isExpanded: true,
+                  iconSize: 24,
+                  hint: const Text("Symptoms After eating"),
+                  value: symptomDropDownValue,
+                  icon: const Icon(Icons.keyboard_arrow_down), 
+                  items: symptomItems.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(), 
+                  onChanged: (String? newValue){
+                    setState(() {
+                      symptomDropDownValue = newValue!;
+                    });
+                  }
                 ),
               ),
               const SizedBox(height:40),

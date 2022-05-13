@@ -1,6 +1,8 @@
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:apma/constants.dart';
+
 
 class ExerciseTrack extends StatefulWidget {
   ExerciseTrack({Key? key}) : super(key: key);
@@ -10,16 +12,15 @@ class ExerciseTrack extends StatefulWidget {
 }
 
 class _ExerciseTrackState extends State<ExerciseTrack> {
-  late String dropDownValue = 'None';
+  late String moveDropDownValue = 'Walking';
+  late String moodAfterDropDownValue = 'Happy';
+  late String moodBeforeDropDownValue = 'Angry';
+  late String timeDropDownValue = '< 10 minutes';
   CalendarFormat _calendarFormat = CalendarFormat.week;
-  late double sliderValue = 0;
-  var items = [
-    "None",
-    "1 time",
-    "2 times",
-    "3 times",
-    "More than 3 times",
-  ];
+  late double painBeforeSliderValue = 0;
+  late double painAfterSliderValue = 0;
+  late String _selectedTime = '';
+  
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +48,29 @@ class _ExerciseTrackState extends State<ExerciseTrack> {
                 },
               ),   
               const SizedBox(height: 30,),
-              const Text("Type of Exercise."),      
+              ElevatedButton(
+                onPressed: () async{
+                  final TimeOfDay? result =
+                  await showTimePicker(context: context, initialTime: TimeOfDay.now());
+                  if (result != null) {
+                    setState(() {
+                      _selectedTime = result.format(context);
+                    });
+                  }
+                }, 
+                child: const Text('Show Time Picker')
+              ),
+              const SizedBox(height: 30,),
+              const Text("Type of Movement."),      
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: DropdownButton(
                   isExpanded: true,
                   iconSize: 24,
-                  hint: const Text("Type of Exercise"),
-                  value: dropDownValue,
+                  hint: const Text("Type of Movement"),
+                  value: moveDropDownValue,
                   icon: const Icon(Icons.keyboard_arrow_down), 
-                  items: items.map((String items) {
+                  items: moveItems.map((String items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -64,38 +78,107 @@ class _ExerciseTrackState extends State<ExerciseTrack> {
                   }).toList(), 
                   onChanged: (String? newValue){
                     setState(() {
-                      dropDownValue = newValue!;
+                      moveDropDownValue = newValue!;
                     });
                   }
                 ),
-              ),     
+              ), 
               const SizedBox(height: 30,),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'How long did you do (in hours)?',
+              const Text("Mood Before Moving"),      
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DropdownButton(
+                  isExpanded: true,
+                  iconSize: 24,
+                  hint: const Text("Prior Mood"),
+                  value: moodBeforeDropDownValue,
+                  icon: const Icon(Icons.keyboard_arrow_down), 
+                  items: moodItems.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(), 
+                  onChanged: (String? newValue){
+                    setState(() {
+                      moodBeforeDropDownValue = newValue!;
+                    });
+                  }
                 ),
               ),
               const SizedBox(height: 30,),
+              const Text("Mood After Moving"),      
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DropdownButton(
+                  isExpanded: true,
+                  iconSize: 24,
+                  hint: const Text("Post Move Mood"),
+                  value: moodAfterDropDownValue,
+                  icon: const Icon(Icons.keyboard_arrow_down), 
+                  items: moodItems.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(), 
+                  onChanged: (String? newValue){
+                    setState(() {
+                      moodAfterDropDownValue = newValue!;
+                    });
+                  }
+                ),
+              ),
+              const SizedBox(height: 30,),
+              const Text("How long did you do?"),      
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DropdownButton(
+                  isExpanded: true,
+                  iconSize: 24,
+                  hint: const Text("Time spent"),
+                  value: timeDropDownValue,
+                  icon: const Icon(Icons.keyboard_arrow_down), 
+                  items: timeItems.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(), 
+                  onChanged: (String? newValue){
+                    setState(() {
+                      timeDropDownValue = newValue!;
+                    });
+                  }
+                ),
+              ),    
+              const SizedBox(height: 30,),
               const Center(
-                child: Text('Intensity of exercise performed.') ,
+                child: Text('Pain before moving') ,
               ),
               Slider(
                 min: 0,
                 max: 10,
                 divisions: 10,
-                value: sliderValue,
+                value: painBeforeSliderValue,
                 onChanged: (newValue) {
-                  setState(() => sliderValue = newValue);
+                  setState(() => painBeforeSliderValue = newValue);
                 },
               ),
-              const SizedBox(height:40),
-              TextFormField(
-                maxLines: 4,
-                decoration: const InputDecoration(
-                  labelText: 'Describe How you feel after the exercise.',
-                ),
+              const SizedBox(height: 30,),
+              const Center(
+                child: Text('Pain after moving') ,
               ),
+              Slider(
+                min: 0,
+                max: 10,
+                divisions: 10,
+                value: painAfterSliderValue,
+                onChanged: (newValue) {
+                  setState(() => painAfterSliderValue = newValue);
+                },
+              ),
+              
               const SizedBox(height:40),
               Container(
                 padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),

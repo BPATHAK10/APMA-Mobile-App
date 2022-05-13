@@ -4,6 +4,7 @@ import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:apma/constants.dart';
 
 class PainTrack extends StatefulWidget {
   PainTrack({Key? key}) : super(key: key);
@@ -19,41 +20,7 @@ class _PainTrackState extends State<PainTrack> {
   late String dropDownValue = "Aching";
   late double sliderValue = 0;
   late bool checkboxListTileValue = false;
-  var painIntensity = [
-    "Little",
-    "Very Mild",
-    "Discomforting",
-    "Tolerable",
-    "Distressing",
-    "Very Distressing",
-    "Intense",
-    "Very Intense",
-    "Utterly Horrible",
-    "Unbearable",
-    "Horrendous"
-  ];
-  var items = [
-    "Aching",
-    "Burning",
-    "Crawling",
-    "Crushing",
-    "Heaviness", 
-    "Icy coldness", 
-    "Intermittent",
-    "Numbing" ,
-    "Piercing" ,
-    "Pounding", 
-    "Pressure", 
-    "Sharp", 
-    "Shooting", 
-    "Sore", 
-    "Stabbing", 
-    "Searing",
-    "Tearing", 
-    "Tenderness", 
-    "Tightness",
-    "Tingling" 
-  ];
+  
 
   @override
   void initState() {
@@ -113,7 +80,7 @@ class _PainTrackState extends State<PainTrack> {
                   hint: const Text("Select Pain Type"),
                   value: dropDownValue,
                   icon: const Icon(Icons.keyboard_arrow_down), 
-                  items: items.map((String items) {
+                  items: painItems.map((String items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -131,7 +98,7 @@ class _PainTrackState extends State<PainTrack> {
                 child: Text('Intensity of Pain') ,
               ),
               Slider(
-                label: painIntensity[sliderValue/10~/10],
+                label: painIntensity[sliderValue.toInt()],
                 min: 0,
                 max: 10,
                 divisions: 10,
