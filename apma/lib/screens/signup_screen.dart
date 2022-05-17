@@ -109,62 +109,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 10.0, right: 15.0),
-                    child: const Divider(
-                      color: Colors.black,
-                      height: 50,
-                    )
-                  ),
-                ),
+            // Row(
+            //   children: <Widget>[
+            //     Expanded(
+            //       child: Container(
+            //         margin: const EdgeInsets.only(left: 10.0, right: 15.0),
+            //         child: const Divider(
+            //           color: Colors.black,
+            //           height: 50,
+            //         )
+            //       ),
+            //     ),
     
-                const Text("OR"),
+            //     const Text("OR"),
     
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 15.0, right: 10.0),
-                    child: const Divider(
-                      color: Colors.black,
-                      height: 50,
-                    )
-                  ),
-                ),
-              ]
-            ),
-            Container(
-              height: 50,
-              width: MediaQuery. of(context). size. width-80,
-              margin: const EdgeInsets.only(top: 10),
-              child: SignInButton(
-                Buttons.GoogleDark,
-                onPressed: () {},
-                text: "Sign up with Google",
-              ),
-            ),
-            Container(
-              height: 50,
-              width: MediaQuery. of(context). size. width-80,
-              margin: const EdgeInsets.only(top: 10),
+            //     Expanded(
+            //       child: Container(
+            //         margin: const EdgeInsets.only(left: 15.0, right: 10.0),
+            //         child: const Divider(
+            //           color: Colors.black,
+            //           height: 50,
+            //         )
+            //       ),
+            //     ),
+            //   ]
+            // ),
+            // Container(
+            //   height: 50,
+            //   width: MediaQuery. of(context). size. width-80,
+            //   margin: const EdgeInsets.only(top: 10),
+            //   child: SignInButton(
+            //     Buttons.GoogleDark,
+            //     onPressed: () {},
+            //     text: "Sign up with Google",
+            //   ),
+            // ),
+            // Container(
+            //   height: 50,
+            //   width: MediaQuery. of(context). size. width-80,
+            //   margin: const EdgeInsets.only(top: 10),
               
-              child: SignInButton(
-                Buttons.Facebook,
-                onPressed: () {}, 
-                text: "Continue with Facebook"
-              ),
-            ),
-            Container(
-              height: 50,
-              width: MediaQuery. of(context). size. width-80,
-              margin: const EdgeInsets.only(top: 10),
-              child: SignInButton(
-                Buttons.AppleDark,
-                onPressed: () {},
-                text: "Sign up with Apple"
-              ),
-            ),
+            //   child: SignInButton(
+            //     Buttons.Facebook,
+            //     onPressed: () {}, 
+            //     text: "Continue with Facebook"
+            //   ),
+            // ),
+            // Container(
+            //   height: 50,
+            //   width: MediaQuery. of(context). size. width-80,
+            //   margin: const EdgeInsets.only(top: 10),
+            //   child: SignInButton(
+            //     Buttons.AppleDark,
+            //     onPressed: () {},
+            //     text: "Sign up with Apple"
+            //   ),
+            // ),
             const SizedBox(height: 30,),
             const Padding(
                 padding: EdgeInsets.all(10.0),

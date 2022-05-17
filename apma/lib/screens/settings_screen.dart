@@ -37,12 +37,12 @@ class _SettingScreenState extends State<SettingScreen> {
                 
               ],
             ),
-            ExpansionTile(
-              title: Text('Security'),
-              children: [
+            // ExpansionTile(
+            //   title: Text('Security'),
+            //   children: [
                 
-              ],
-            ),
+            //   ],
+            // ),
             
             ExpansionTile(
               title: Text('Terms of Use'),
