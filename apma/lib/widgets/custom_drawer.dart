@@ -5,6 +5,7 @@ import 'package:apma/screens/history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:apma/Boxes/boxes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget showDrawer(BuildContext context){
   final userEmail = Provider.of<String>(context,listen:false);
@@ -39,16 +40,30 @@ Widget showDrawer(BuildContext context){
             );
           },
         ),
+        // ListTile(
+        //   title: const Text('Settings'),
+        //   onTap: () async{
+        //     await Navigator.pushReplacement(
+        //       context,
+        //         MaterialPageRoute(builder: (context) => Provider<String>(
+        //             create: (context) => user!.email,
+        //             child: const SettingScreen())
+        //         )
+        //     );
+        //   } 
+        // ),
         ListTile(
-          title: const Text('Settings'),
+          title: const Text('Terms of Reference'),
           onTap: () async{
-            await Navigator.pushReplacement(
-              context,
-                MaterialPageRoute(builder: (context) => Provider<String>(
-                    create: (context) => user!.email,
-                    child: const SettingScreen())
-                )
-            );
+            final Uri _url = Uri.parse('https://www.painmanagement.org.au/terms-of-reference-for-apma-app');
+            if (!await launchUrl(_url)) throw 'Could not launch $_url';
+          } 
+        ),
+        ListTile(
+          title: const Text('Privacy Policy'),
+          onTap: () async{
+            final Uri _url = Uri.parse('https://www.painmanagement.org.au/terms-of-reference-for-apma-app');
+            if (!await launchUrl(_url)) throw 'Could not launch $_url';
           } 
         ),
         ListTile(

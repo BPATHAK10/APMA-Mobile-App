@@ -1,6 +1,4 @@
 import 'package:apma/Boxes/boxes.dart';
-import 'package:apma/models/pain_model.dart';
-import 'package:apma/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -31,21 +29,6 @@ class ProfileData {
     this.foodIllness = foodIllness;
   }
 
-  // void updateName(String? name) {
-  //   this.name = name;
-  // }
-
-  // void updateAge(String? age) {
-  //   this.age = age;
-  // }
-
-  // void updateGender(String? gender) {
-  //   this.gender = gender;
-  // }
-
-  // void updatePostalCode(String? postalCode) {
-  //   this.postalCode = postalCode;
-  // }
 }
 
 class ProfileTab extends StatefulWidget {
@@ -126,16 +109,6 @@ class _ProfileTabState extends State<ProfileTab> {
 
     initialProfileData.updateProfileData(
         user!.name, user.age, user.gender, user.postCode, user.foodIllness);
-    print("initial profile data is::");
-    initialProfileData.display();
-
-    // profileData.updateProfileData(
-    //     user?.name, user?.age, user?.gender, user?.postCode);
-
-    // print("inside build");
-    // profileData.display();
-
-    // selectedGender  = initialProfileData.gender;
 
     return SingleChildScrollView(
       child: Center(
