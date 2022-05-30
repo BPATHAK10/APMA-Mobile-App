@@ -1,8 +1,8 @@
 import 'package:apma/Boxes/boxes.dart';
+import 'package:provider/provider.dart';
 import 'package:apma/models/pain_model.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:apma/constants.dart';
 
@@ -15,11 +15,11 @@ class PainTrack extends StatefulWidget {
 
 class _PainTrackState extends State<PainTrack> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
-  DateTime? _selectedDay;
-  late DateTime recordDate;
   late String dropDownValue = "Aching";
   late double sliderValue = 0;
   late bool checkboxListTileValue = false;
+  late DateTime recordDate;
+  DateTime? _selectedDay;
   
 
   @override
@@ -150,6 +150,23 @@ class _PainTrackState extends State<PainTrack> {
                         Pain painData = Pain(recordDate, dropDownValue, sliderValue,checkboxListTileValue);
                         if (user!=null){
                           user.pains.add(painData);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Pain Data Added',
+                              ),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "Couldn't add data.",
+                              ),
+                            ),
+                          );
                         }
                       },
                     )

@@ -1,8 +1,10 @@
+import 'package:apma/models/movement_model.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:apma/constants.dart';
-
+import 'package:apma/Boxes/boxes.dart';
+import 'package:provider/provider.dart';
 
 class ExerciseTrack extends StatefulWidget {
   ExerciseTrack({Key? key}) : super(key: key);
@@ -20,10 +22,21 @@ class _ExerciseTrackState extends State<ExerciseTrack> {
   late double painBeforeSliderValue = 0;
   late double painAfterSliderValue = 0;
   late String _selectedTime = '';
+
+  late DateTime recordDate;
+  DateTime? _selectedDay;
   
 
   @override
+  void initState() {
+    super.initState();
+    recordDate = DateTime.now();
+  }
+  
+  @override
   Widget build(BuildContext context) {
+    final _userEmail = Provider.of<String>(context, listen: false);
+    final user = Boxes.getUsers().get(_userEmail);
     return Scaffold(
       appBar: showAppBar(context,'Movement'),
       body: SingleChildScrollView(
@@ -38,13 +51,27 @@ class _ExerciseTrackState extends State<ExerciseTrack> {
                 calendarFormat : _calendarFormat,
                 firstDay: DateTime.utc(2020, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(),
+                focusedDay: recordDate,
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      recordDate = focusedDay;
+                    });
+                  }
+                },
                 onFormatChanged: (format) {
                   if (_calendarFormat != format) {
                     setState(() {
                       _calendarFormat = format;
                     });
                   }
+                },
+                onPageChanged: (focusedDay) {
+                  recordDate = focusedDay;
                 },
               ),   
               const SizedBox(height: 30,),
@@ -208,6 +235,27 @@ class _ExerciseTrackState extends State<ExerciseTrack> {
                       ),
                       child: const Text('Done'),
                       onPressed: (){
+                        Movement movementData = Movement(recordDate,moveDropDownValue, moodBeforeDropDownValue,moodAfterDropDownValue,timeDropDownValue, painBeforeSliderValue, painAfterSliderValue);
+                        if (user!=null){
+                          user.movement.add(movementData);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Movement Data Added',
+                              ),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "Couldn't add data.",
+                              ),
+                            ),
+                          );
+                        }
                       },
                     )
                   ]

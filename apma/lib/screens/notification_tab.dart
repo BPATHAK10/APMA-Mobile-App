@@ -23,7 +23,7 @@ class _NotificationTabState extends State<NotificationTab> {
     final _userEmail = Provider.of<String>(context, listen: false);
     final user = Boxes.getUsers().get(_userEmail);
 
-    user?.medicines.forEach((element) {
+    user?.medicines.forEach((element) async{
       var newMedicine = Medicine(element.name,"ml",element.dosage,element.expiryDate,element.frequency);
       setState(() {
         medicines.add(newMedicine);

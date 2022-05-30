@@ -1,6 +1,6 @@
 import 'package:apma/screens/home_screen.dart';
 import 'package:apma/screens/login_screen.dart';
-import 'package:apma/screens/settings_screen.dart';
+// import 'package:apma/screens/settings_screen.dart';
 import 'package:apma/screens/history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
