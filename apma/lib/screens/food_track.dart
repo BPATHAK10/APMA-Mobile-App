@@ -1,6 +1,9 @@
+import 'package:apma/models/food_model.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:apma/Boxes/boxes.dart';
+import 'package:provider/provider.dart';
 
 class FoodTrack extends StatefulWidget {
   FoodTrack({Key? key}) : super(key: key);
@@ -18,55 +21,20 @@ class _FoodTrackState extends State<FoodTrack> {
   late double hungerBeforeSliderValue = 0;
   late double hungerAfterSliderValue = 0;
   late double sliderValue = 0;
-  var whomItems = [
-    "Alone",
-    "Colleagues",
-    "Family",
-    "Friends",
-  ];
-  var moodItems = [
-    "Angry",
-    "Bored",
-    "Depressed",
-    "Happy",
-    "Neutral",
-    "Rushed",
-    "Tend",
-    "Tired",
-  ];
-  var symptomItems = [
-    "None",
-    "Anxiety",
-    "Asthma",
-    "Bloating",
-    "Constipation",
-    "Diarrhea",
-    "Eczema",
-    "Fatigue",
-    "Flushing skin", 
-    "Gas",
-    "Hay Fever",
-    "Headache",
-    "Heartburn",
-    "Hives",
-    "Indigestion",
-    "Insomnia",
-    "Jitters",
-    "Joint pain",
-    "Mouth Ulcers",
-    "Nausea",
-    "Nervousness",
-    "Rapid heartbeat",
-    "Rash",
-    "Reflux",  
-    "Restlessness",
-    "Sinus",
-    "Stomach upset",
-    "Vomiting",
-  ];
+  late DateTime recordDate;
+  DateTime? _selectedDay;
+  
+
+  @override
+  void initState() {
+    super.initState();
+    recordDate = DateTime.now();
+  }
   
   @override
   Widget build(BuildContext context) {
+    final _userEmail = Provider.of<String>(context, listen: false);
+    final user = Boxes.getUsers().get(_userEmail);
     return Scaffold(
       appBar: showAppBar(context,'Food'),
       body:SingleChildScrollView(
@@ -81,13 +49,27 @@ class _FoodTrackState extends State<FoodTrack> {
                 calendarFormat : _calendarFormat,
                 firstDay: DateTime.utc(2020, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(),
+                focusedDay: recordDate,
                 onFormatChanged: (format) {
                   if (_calendarFormat != format) {
                     setState(() {
                       _calendarFormat = format;
                     });
                   }
+                },
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      recordDate = focusedDay;
+                    });
+                  }
+                },
+                onPageChanged: (focusedDay) {
+                  recordDate = focusedDay;
                 },
               ),   
               const SizedBox(height: 30,),
@@ -151,7 +133,7 @@ class _FoodTrackState extends State<FoodTrack> {
               ),
               const SizedBox(height: 30,),
               const Center(
-                child: Text('Huger Level') ,
+                child: Text('Hunger Level') ,
               ),
               Slider(
                 min: 0,
@@ -242,6 +224,27 @@ class _FoodTrackState extends State<FoodTrack> {
                       ),
                       child: const Text('Done'),
                       onPressed: (){
+                        Food foodData = Food(recordDate, _selectedTime,whomDropDownValue,moodDropDownValue,symptomDropDownValue,hungerBeforeSliderValue,hungerAfterSliderValue);
+                        if (user!=null){
+                          user.food.add(foodData);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Food Data Added',
+                              ),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "Couldn't add data.",
+                              ),
+                            ),
+                          );
+                        }
                       },
                     )
                   ]

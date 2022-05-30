@@ -1,9 +1,13 @@
+import 'package:apma/models/sleep_model.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:apma/Boxes/boxes.dart';
+import 'package:provider/provider.dart';
 
 class SleepTrack extends StatefulWidget {
   SleepTrack({Key? key}) : super(key: key);
+  
 
   @override
   State<SleepTrack> createState() => _SleepTrackState();
@@ -20,8 +24,18 @@ class _SleepTrackState extends State<SleepTrack> {
     "3 times",
     "More than 3 times",
   ];
+  DateTime? _selectedDay;
+  late DateTime recordDate;
+
+  @override
+  void initState() {
+    super.initState();
+    recordDate = DateTime.now();
+  }
   @override
   Widget build(BuildContext context) {
+    final _userEmail = Provider.of<String>(context, listen: false);
+    final user = Boxes.getUsers().get(_userEmail);
     return Scaffold(
       appBar: showAppBar(context,'Sleep'),
       body: SingleChildScrollView(
@@ -36,13 +50,27 @@ class _SleepTrackState extends State<SleepTrack> {
                 calendarFormat : _calendarFormat,
                 firstDay: DateTime.utc(2020, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(),
+                focusedDay: recordDate,
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      recordDate = focusedDay;
+                    });
+                  }
+                },
                 onFormatChanged: (format) {
                   if (_calendarFormat != format) {
                     setState(() {
                       _calendarFormat = format;
                     });
                   }
+                },
+                onPageChanged: (focusedDay) {
+                  recordDate = focusedDay;
                 },
               ),            
               const SizedBox(height: 30,),
@@ -126,6 +154,27 @@ class _SleepTrackState extends State<SleepTrack> {
                       ),
                       child: const Text('Done'),
                       onPressed: (){
+                        Sleep sleepData = Sleep(recordDate, sliderValue, dropDownValue);
+                        if (user!=null){
+                          user.sleep.add(sleepData);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Sleep Data Added',
+                              ),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "Couldn't add data.",
+                              ),
+                            ),
+                          );
+                        }
                       },
                     )
                   ]

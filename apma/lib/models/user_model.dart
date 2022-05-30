@@ -1,6 +1,11 @@
+import 'package:apma/models/energy_model.dart';
 import 'package:apma/models/medicine_model.dart';
+import 'package:apma/models/movement_model.dart';
 import 'package:apma/models/pain_model.dart';
+import 'package:apma/models/sleep_model.dart';
 import 'package:hive/hive.dart';
+
+import 'food_model.dart';
 part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -31,5 +36,17 @@ class User extends HiveObject {
 
     @HiveField(14)
     List<String> foodIllness = [];
+    
+    @HiveField(15)
+    List<Energy> energy=[];
+
+    @HiveField(16)
+    List<Sleep> sleep=[];
+
+    @HiveField(17)
+    List<Movement> movement=[];
+
+    @HiveField(18)
+    List<Food> food=[];
 
 }
