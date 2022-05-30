@@ -1,5 +1,4 @@
 import 'package:apma/models/medicine_model.dart';
-import 'package:apma/screens/home_screen.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -93,7 +92,7 @@ class _MedicTrackState extends State<MedicTrack> {
     final _userEmail = Provider.of<String>(context, listen: false);
     final user = Boxes.getUsers().get(_userEmail);
   
-    print(user?.medicines.length);
+    // print(user?.medicines.length);
     if (user!=null){
       user.medicines.forEach((element) {
         var newMedicine = Medicine(element.name,"ml",element.dosage,element.expiryDate,element.frequency);

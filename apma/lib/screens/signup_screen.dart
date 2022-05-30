@@ -28,7 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.only(top: 60.0, bottom: 60.0),
               child: Center(
                 child: Container(
-                  child: Text(
+                  child: const Text(
                     "Welcome!",
                     style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                   ),
@@ -186,7 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LoginScreen()
+                          builder: (context) => const LoginScreen()
                       ));
                 },
                 child: const Text(

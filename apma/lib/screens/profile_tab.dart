@@ -12,13 +12,13 @@ class ProfileData {
 
   ProfileData(this.name, this.age, this.gender, this.postalCode, this.foodIllness);
 
-  void display() {
-    print(name);
-    print(age);
-    print(gender);
-    print(postalCode);
-    print(foodIllness);
-  }
+  // void display() {
+  //   print(name);
+  //   print(age);
+  //   print(gender);
+  //   print(postalCode);
+  //   print(foodIllness);
+  // }
 
   void updateProfileData(
       String name, String age, String gender, String postalCode, foodIllness) {
@@ -259,7 +259,7 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
                       itemsTextStyle: TextStyle(color: Colors.black),
                       onConfirm: (results){
-                        print(results);
+                        // print(results);
                         profileData.foodIllness = results.map((e) => e.toString()).toList();
                       },
                     ))
@@ -295,8 +295,8 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
                       child: const Text('Save'),
                       onPressed: () {
-                        print("inside edit profile");
-                        profileData.display();
+                        // print("inside edit profile");
+                        // profileData.display();
 
                         profileData.name != initialProfileData.name
                             ? user.name = profileData.name

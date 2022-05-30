@@ -1,8 +1,6 @@
 import 'package:apma/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'models/medicine_model.dart';
-import 'models/pain_model.dart';
 import 'models/user_model.dart';
 
 void main() async {
@@ -29,7 +27,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: LoginScreen()
+        home: const LoginScreen()
     );
   }
 }

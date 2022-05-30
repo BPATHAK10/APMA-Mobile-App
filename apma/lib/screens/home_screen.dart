@@ -4,8 +4,6 @@ import 'package:apma/screens/profile_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:apma/widgets/custom_appbar.dart';
 import 'package:apma/widgets/custom_drawer.dart';
-import 'package:provider/provider.dart';
-import 'package:apma/Boxes/boxes.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);

@@ -114,9 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   final user = checkUser(email, password);
             
                   if (user != null) {
-                    print("inside user with email:: "+user.email);
-                    // final currentUser = UserModel();
-                    // currentUser.updateUser(email);
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Provider<String>(
                           create: (context) => user.email,
@@ -141,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 TextButton(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -163,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignUpScreen(),
+                        builder: (context) => const SignUpScreen(),
                       ),
                     );
                   },
