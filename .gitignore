@@ -38,6 +38,7 @@ doc/api/
 *.ipr
 *.iws
 .idea/
+*.zip
 
 # Visual Studio Code related
 .classpath

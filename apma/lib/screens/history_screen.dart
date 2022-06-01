@@ -64,6 +64,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
         });
       }
     );
+    user?.sleep.forEach((element) {
+        var sleep = Sleep(element.date,element.qualityOfSleep,element.timesWoke);
+        setState(() {
+          sleeps.add(sleep);
+        });
+      }
+    );
 
     return Scaffold(
       appBar: showAppBar(context,'My History'),
@@ -199,6 +206,39 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ): 
             const Center(
               child:Text("No Movement History")
+            ),
+            const Divider(
+                color: Colors.black,
+                height: 80,
+            ),
+            (sleeps.isNotEmpty)?
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: sleeps.length,
+              itemBuilder: (BuildContext context, int index){
+                final currentSleep = sleeps[index];
+                return Container(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget> [
+                      Expanded(
+                        child:Text(
+                          'Quality Level: ${currentSleep.qualityOfSleep}' + "Woke " + currentSleep.timesWoke,
+                          style:const  TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      Text('${currentSleep.date}')
+                    ]
+                  ),
+                );
+              }
+            ): 
+            const Center(
+              child:Text("No Sleep History")
             ),
           ],
         ),

@@ -101,7 +101,7 @@ class _MedicTrackState extends State<MedicTrack> {
         });
       });
     }
-    // medicines = medicines.reversed.toList();
+    medicines.sort((a,b)=> a.name.compareTo(b.name));
 
     return Scaffold(
       appBar: showAppBar(context,'Medics'),
