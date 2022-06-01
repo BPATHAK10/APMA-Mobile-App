@@ -101,7 +101,7 @@ class _MedicTrackState extends State<MedicTrack> {
         });
       });
     }
-    medicines = medicines.reversed.toList();
+    // medicines = medicines.reversed.toList();
 
     return Scaffold(
       appBar: showAppBar(context,'Medics'),
